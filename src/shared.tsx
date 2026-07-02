@@ -106,7 +106,7 @@ export function Progress({ step, total, onBack }: { step: number; total: number;
   );
 }
 
-export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAuthor, onStart, illustration, secondaryLabel, onSecondary }: {
+export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAuthor, onStart, illustration, secondaryLabel, onSecondary, ctaLabel }: {
   eyebrow: string;
   title: string;
   description: string;
@@ -117,52 +117,29 @@ export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAu
   illustration?: ReactNode;
   secondaryLabel?: string;
   onSecondary?: () => void;
+  ctaLabel?: string;
 }) {
   return (
-    <div style={{ maxWidth: 720 }}>
-      <div style={{ display: "flex", gap: 6, alignItems: "center", marginBottom: 16 }}>
+    <div style={{ maxWidth: 680 }}>
+      <div style={{ display: "flex", gap: 6, alignItems: "center", marginBottom: 12 }}>
         <div style={{ width: 20, height: 1.5, background: T.mid, borderRadius: 1 }} />
         <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: T.mid }}>{eyebrow}</div>
       </div>
-      <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 40, color: T.ink, lineHeight: 1.05, marginBottom: 20, letterSpacing: "-0.01em" }}>{title}</h2>
-      <Rule />
-      <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.8, marginBottom: 32 }}>{description}</p>
+      <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 42, color: T.ink, lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.01em", maxWidth: 560 }}>{title}</h2>
+      <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.7, marginBottom: steps ? 18 : 28, maxWidth: 540 }}>{description}</p>
 
       {steps && (
-        <div style={{ marginBottom: 36 }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 14 }}>What you'll decide</div>
-          <div style={{ display: "flex", gap: 0, flexWrap: "nowrap", overflowX: "auto", paddingBottom: 4 }}>
-            {steps.map((s, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <div style={{ width: 22, height: 22, borderRadius: "50%", background: T.navyLight, border: "1px solid " + T.rule, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700, color: T.navy }}>{i + 1}</div>
-                  <div style={{ fontSize: 12, color: T.mid, fontWeight: 500, whiteSpace: "nowrap" }}>{s}</div>
-                </div>
-                {i < steps.length - 1 && <div style={{ width: 16, height: 1, background: T.rule, margin: "0 6px", flexShrink: 0 }} />}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {(quote || illustration) && (
-        <div style={{ display: "flex", gap: 36, alignItems: "center", padding: "28px 0", borderTop: "1px solid " + T.rule, borderBottom: "1px solid " + T.rule, marginBottom: 36, flexWrap: "wrap" }}>
-          {illustration && <div className="intro-illus" style={{ flexShrink: 0 }}>{illustration}</div>}
-          {quote && (
-            <div style={{ flex: 1, minWidth: 200 }}>
-              <div style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", fontSize: 19, color: T.ink, lineHeight: 1.5, marginBottom: 12 }}>"{quote}"</div>
-              <div style={{ fontSize: 11, color: T.mid }}>{quoteAuthor}</div>
-            </div>
-          )}
+        <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid, marginBottom: 28, lineHeight: 2 }}>
+          {steps.join("  ·  ")}
         </div>
       )}
 
       <div style={{ display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
         <button onClick={onStart}
-          style={{ background: T.dark, color: "white", border: "none", padding: "15px 36px", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", borderRadius: 2, transition: "opacity 0.15s" }}
+          style={{ background: T.dark, color: "white", border: "none", padding: "14px 32px", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", borderRadius: 2, transition: "opacity 0.15s" }}
           onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
           onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-          Start the guide &rarr;
+          {ctaLabel || "Start"} &rarr;
         </button>
         {secondaryLabel && onSecondary && (
           <button onClick={onSecondary}
@@ -171,6 +148,18 @@ export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAu
           </button>
         )}
       </div>
+
+      {(quote || illustration) && (
+        <div style={{ display: "flex", gap: 32, alignItems: "center", marginTop: 44, paddingTop: 24, borderTop: "1px solid " + T.rule, flexWrap: "wrap", maxWidth: 560 }}>
+          {illustration && <div className="intro-illus" style={{ flexShrink: 0 }}>{illustration}</div>}
+          {quote && (
+            <div style={{ flex: 1, minWidth: 200 }}>
+              <div style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", fontSize: 15, color: T.mid, lineHeight: 1.6, marginBottom: 6 }}>"{quote}"</div>
+              <div style={{ fontSize: 11, color: T.mid, opacity: 0.8 }}>{quoteAuthor}</div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -311,7 +300,7 @@ export function OptionCard({ opt, isChosen, onChoose, portrait }: { opt: Option;
   );
 }
 
-export function Journey({ questions, onComplete, onAnswerChange }: { questions: Question[]; onComplete: (a: Answers) => void; onAnswerChange?: (partial: Answers) => void }) {
+export function Journey({ questions, onComplete, onAnswerChange, skippable }: { questions: Question[]; onComplete: (a: Answers) => void; onAnswerChange?: (partial: Answers) => void; skippable?: boolean }) {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const safeStep = Math.min(step, questions.length - 1);
@@ -323,6 +312,10 @@ export function Journey({ questions, onComplete, onAnswerChange }: { questions: 
     onAnswerChange?.(next);
     if (safeStep + 1 < questions.length) setStep(safeStep + 1);
     else onComplete(next);
+  };
+  const skip = () => {
+    if (safeStep + 1 < questions.length) setStep(safeStep + 1);
+    else onComplete(answers);
   };
   const isPortraitQuestion = q.options.some(opt => opt.img || opt.illus);
   return (
@@ -339,6 +332,12 @@ export function Journey({ questions, onComplete, onAnswerChange }: { questions: 
         <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 8 }}>
           {q.options.map((opt, i) => <OptionCard key={i} opt={opt} isChosen={chosen === (opt.id || opt.label)} onChoose={() => choose(opt.id || opt.label)} />)}
         </div>
+      )}
+      {skippable && (
+        <button onClick={skip}
+          style={{ background: "none", border: "none", padding: 0, marginTop: 14, fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: T.mid, cursor: "pointer", borderBottom: "1px solid " + T.rule, fontFamily: "Inter, sans-serif" }}>
+          Undecided — skip this one &rarr;
+        </button>
       )}
       {q.groomsSay && <GroomsSay quotes={q.groomsSay} />}
     </div>

@@ -17,9 +17,9 @@ const MODULES = [
   {
     id: "attire",
     label: "Attire",
-    desc: "Build your complete look, one decision at a time. Ends with matched supplier links.",
+    desc: "The suit decisions you didn't know you'd have to make — lapel to cuffs — before your first fitting.",
     tag: "Guide",
-    time: "4 min",
+    time: "Browse",
     icon: (
       <svg viewBox="0 0 32 32" fill="none" style={{ width: 28, height: 28 }}>
         <path d="M11 7 Q8 9 6 13 L5 28 L27 28 L26 13 Q24 9 21 7" stroke={T.navy} strokeWidth="1.8" strokeLinejoin="round" fill="none" />
@@ -31,7 +31,7 @@ const MODULES = [
   {
     id: "rings",
     label: "Rings",
-    desc: "Every option from platinum to rubber to a ring tattoo. No external searching required.",
+    desc: "Every option, from platinum to rubber to a ring tattoo. The complete picture.",
     tag: "Guide",
     time: "5 min",
     icon: (
@@ -161,7 +161,7 @@ export default function Lapel() {
           .nav-links { display: none !important; }
           .module-grid { grid-template-columns: 1fr 1fr !important; }
           .hero-title { font-size: 38px !important; }
-          .content-pad { padding: 32px 20px !important; }
+          .content-pad { padding: 20px 20px 48px !important; }
           .header-pad { padding: 0 20px !important; }
           .option-illus { display: none !important; }
           .intro-illus { display: none !important; }
@@ -221,18 +221,18 @@ export default function Lapel() {
       ) : !active ? (
         <div>
           {/* Hero */}
-          <div style={{ background: T.navy, padding: "10px 32px 64px" }}>
+          <div style={{ background: T.navy, padding: "28px 32px 56px" }}>
             <div style={{ maxWidth: 960, margin: "0 auto", width: "100%" }}>
               <div style={{ maxWidth: 720 }}>
-                <h1 className="hero-title" style={{ fontFamily: "'DM Serif Display', serif", fontSize: 62, color: "white", lineHeight: 1.02, marginBottom: 20, letterSpacing: "-0.02em", textAlign: "left" }}>
+                <h1 className="hero-title" style={{ fontFamily: "'DM Serif Display', serif", fontSize: 54, color: "white", lineHeight: 1.06, marginBottom: 18, letterSpacing: "-0.02em", textAlign: "left" }}>
                   {displayProfile.groomName
-                    ? <>The only comprehensive<br />guide built for you,<br />{displayProfile.groomName}.</>
-                    : <>The only comprehensive<br />guide built for the groom.</>
+                    ? <>Every decision you actually<br />have to make, {displayProfile.groomName}.</>
+                    : <>Every decision a groom<br />actually has to make.</>
                   }
                 </h1>
-                <div style={{ height: 1, background: "rgba(255,255,255,0.12)", marginBottom: 20 }} />
-                <p style={{ fontSize: 16, color: "rgba(255,255,255,0.55)", lineHeight: 1.8, maxWidth: 560, margin: 0, textAlign: "left" }}>
-                  Attire, rings, stag, speech — every decision covered properly.
+                <div style={{ height: 1, background: "rgba(255,255,255,0.12)", marginBottom: 18 }} />
+                <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.75, maxWidth: 520, margin: 0, textAlign: "left" }}>
+                  Attire, rings, stag, speech — covered properly. No fluff.
                   {daysLeft !== null && daysLeft > 0 && (
                     <> {displayProfile.venue ? displayProfile.venue : "The big day"} is in <strong style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>{daysLeft.toLocaleString()} days</strong>.</>
                   )}
@@ -287,9 +287,9 @@ export default function Lapel() {
           </div>
         </div>
       ) : (
-        <div className="content-pad" style={{ maxWidth: 1200, margin: "0 auto", padding: "56px 48px" }}>
+        <div className="content-pad" style={{ maxWidth: 1200, margin: "0 auto", padding: "26px 48px 64px" }}>
           <button onClick={() => setActive(null)} className="back-btn"
-            style={{ background: "none", border: "none", fontSize: 11, fontWeight: 600, color: T.navy, letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer", marginBottom: 40, display: "flex", alignItems: "center", gap: 6, fontFamily: "Inter, sans-serif" }}>
+            style={{ background: "none", border: "none", fontSize: 11, fontWeight: 600, color: T.navy, letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer", marginBottom: 22, display: "flex", alignItems: "center", gap: 6, fontFamily: "Inter, sans-serif" }}>
             <span style={{ fontSize: 14 }}>&larr;</span> Back to guides
           </button>
           {renderModule()}
