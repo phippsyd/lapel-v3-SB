@@ -74,10 +74,11 @@ export function GoodToKnow({ children }: { children: ReactNode }) {
   );
 }
 
-export function AffLink({ label, url }: AffLinkData) {
+export function AffLink({ label, url, light }: AffLinkData & { light?: boolean }) {
+  const c = light ? "rgba(255,255,255,0.9)" : T.navy;
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer"
-      style={{ display: "inline-flex", alignItems: "center", gap: 5, fontSize: 11, fontWeight: 600, color: T.navy, textDecoration: "none", borderBottom: "1px solid " + T.navy, paddingBottom: 1, transition: "opacity 0.15s" }}
+    <a href={url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+      style={{ display: "inline-flex", alignItems: "center", gap: 5, fontSize: 11, fontWeight: 600, color: c, textDecoration: "none", borderBottom: "1px solid " + c, paddingBottom: 1, transition: "opacity 0.15s" }}
       onMouseEnter={e => (e.currentTarget.style.opacity = "0.7")}
       onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
       {label} &rarr;
@@ -267,7 +268,7 @@ export function OptionCard({ opt, isChosen, onChoose, portrait }: { opt: Option;
               ))}
             </div>
           )}
-          {opt.aff && !isChosen && <div style={{ marginTop: 8 }}><AffLink label={opt.aff.label} url={opt.aff.url} /></div>}
+          {opt.aff && <div style={{ marginTop: 8 }}><AffLink label={opt.aff.label} url={opt.aff.url} light={isChosen} /></div>}
         </div>
       </button>
     );
@@ -330,7 +331,7 @@ export function OptionCard({ opt, isChosen, onChoose, portrait }: { opt: Option;
             ))}
           </div>
         )}
-        {opt.aff && !isChosen && <div style={{ marginTop: 12 }}><AffLink label={opt.aff.label} url={opt.aff.url} /></div>}
+        {opt.aff && <div style={{ marginTop: 12 }}><AffLink label={opt.aff.label} url={opt.aff.url} light={isChosen} /></div>}
       </div>
       <div style={{ fontSize: 16, color: isChosen ? "white" : "transparent", flexShrink: 0, transition: "color 0.15s, transform 0.15s", transform: isChosen ? "scale(1)" : "scale(0.5)" }}>&#10003;</div>
     </button>

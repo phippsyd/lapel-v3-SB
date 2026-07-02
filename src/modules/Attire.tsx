@@ -447,6 +447,21 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
   };
   const shoeLink = answers.shoes ? shoeAffiliate[answers.shoes] : undefined;
 
+  // Resolve each answer back to its full option, so the sheet shows proper
+  // labels ("Self-tie bow tie", not "self-tie") and the retailer link the
+  // groom saw when he chose it.
+  const askedQuestions = buildQuestions(answers);
+  const optionFor = (key: string) => {
+    const q = askedQuestions.find(qq => qq.key === key);
+    return q?.options.find(o => (o.id || o.label) === answers[key]);
+  };
+  const visualCardKeys: Record<string, string> = {
+    "Lapel": "lapel",
+    "Button stance": "buttonStance",
+    "Shoes": "shoes",
+    "Pocket square": "pocketSquareFold",
+  };
+
   return (
     <div style={{ maxWidth: 760 }}>
       <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 34, color: T.ink, marginBottom: 8 }}>
@@ -456,42 +471,7 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
         Everything you leaned towards, in the language the shop will use. Anything you skipped, you now know exists — ask to see it in person before you rule it out.
       </div>
 
-      {visualCards.length > 0 && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12, marginBottom: 32, maxWidth: 480 }}>
-          {visualCards.map((card, i) => (
-            <div key={i} style={{ background: "#FFFFFF", border: "1px solid " + T.rule, borderRadius: 8, overflow: "hidden", display: "flex", flexDirection: "column" }}>
-              <div style={{ background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 16px 12px" }}>
-                <img
-                  src={card.img}
-                  alt={card.value}
-                  style={{ height: 140, width: "100%", objectFit: "contain", display: "block" }}
-                />
-              </div>
-              <div style={{ padding: "0 16px 14px", textAlign: "center" }}>
-                <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid, marginBottom: 2 }}>
-                  {card.label}
-                </div>
-                <div style={{ fontSize: 14, fontWeight: 500, color: T.ink }}>{card.value}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {detailRows.length > 0 && (
-        <div style={{ marginBottom: 36 }}>
-          {detailRows.map((row, i) => (
-            <div key={row.key} style={{ display: "flex", gap: 20, padding: "12px 0", borderBottom: i < detailRows.length - 1 ? "1px solid " + T.rule : "none" }}>
-              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid, minWidth: 140 }}>
-                {row.label}
-              </div>
-              <div style={{ fontSize: 14, color: T.ink }}>{answers[row.key]}</div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div style={{ borderTop: "1px solid " + T.rule, paddingTop: 28, marginBottom: 24 }}>
+      <div style={{ marginBottom: 40 }}>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 14 }}>
           Where to go
         </div>
@@ -515,11 +495,54 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
         </div>
       </div>
 
-      {shoeLink && (
-        <div style={{ marginBottom: 28 }}>
-          <AffLink label={shoeLink.label} url={shoeLink.url} />
+      <div style={{ borderTop: "1px solid " + T.rule, paddingTop: 28 }}>
+        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 18 }}>
+          The sheet
         </div>
-      )}
+
+        {visualCards.length > 0 && (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12, marginBottom: 32, maxWidth: 480 }}>
+            {visualCards.map((card, i) => {
+              const cardAff = (card.label === "Shoes" ? shoeLink : undefined) || optionFor(visualCardKeys[card.label] || "")?.aff;
+              return (
+                <div key={i} style={{ background: "#FFFFFF", border: "1px solid " + T.rule, borderRadius: 8, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+                  <div style={{ background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 16px 12px" }}>
+                    <img
+                      src={card.img}
+                      alt={card.value}
+                      style={{ height: 140, width: "100%", objectFit: "contain", display: "block" }}
+                    />
+                  </div>
+                  <div style={{ padding: "0 16px 14px", textAlign: "center" }}>
+                    <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid, marginBottom: 2 }}>
+                      {card.label}
+                    </div>
+                    <div style={{ fontSize: 14, fontWeight: 500, color: T.ink, marginBottom: cardAff ? 8 : 0 }}>{card.value}</div>
+                    {cardAff && <AffLink label={cardAff.label} url={cardAff.url} />}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {detailRows.length > 0 && (
+          <div style={{ marginBottom: 36 }}>
+            {detailRows.map((row, i) => {
+              const opt = optionFor(row.key);
+              return (
+                <div key={row.key} style={{ display: "flex", gap: 20, padding: "12px 0", borderBottom: i < detailRows.length - 1 ? "1px solid " + T.rule : "none", alignItems: "baseline", flexWrap: "wrap" }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid, minWidth: 140 }}>
+                    {row.label}
+                  </div>
+                  <div style={{ fontSize: 14, color: T.ink, flex: 1 }}>{opt?.label || answers[row.key]}</div>
+                  {opt?.aff && <AffLink label={opt.aff.label} url={opt.aff.url} />}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
 
       <div style={{ display: "flex", gap: 12, alignItems: "center", paddingTop: 24, borderTop: "1px solid " + T.rule }}>
         {!saved ? (
