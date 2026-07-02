@@ -112,6 +112,14 @@ const MAT_LINKS: Record<string, { label: string; url: string }[]> = {
 
 export const ringsAuditGroups = questions.map(q => ({ section: "Rings — " + q.question, options: q.options }));
 
+// ── INTRO PLATES ──────────────────────────────────────────────────────────
+// Paste your chosen Unsplash images here (images.unsplash.com URL, caption,
+// photographer name + profile URL). Renders single-column until filled.
+const RINGS_INTRO_PLATES = [
+  { img: "", caption: "Brushed platinum", credit: { name: "", url: "" } },
+  { img: "", caption: "The alternatives", credit: { name: "", url: "" } },
+];
+
 export function RingsModule() {
   const [phase, setPhase] = useState<"intro" | "journey" | "result">("intro");
   const [answers, setAnswers] = useState<Answers>({});
@@ -121,8 +129,9 @@ export function RingsModule() {
       description="Platinum to rubber to a ring tattoo — the complete picture, not a curated shortlist."
       steps={["Match or contrast", "Material", "Width", "Finish", "Budget", "Engraving"]}
       quote="I went into three jewellers and none of them mentioned silicone, titanium, or tungsten. I only found out about them online. This is what I wish I had read first."
-      quoteAuthor="u/ringnewbie"
+      quoteAuthor="A groom, on Reddit"
       illustration={undefined}
+      plates={RINGS_INTRO_PLATES.filter(p => p.img)}
       onStart={() => setPhase("journey")} />
   );
 

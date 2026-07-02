@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { T } from "../theme";
-import { CityIllus } from "../illustrations";
+
 import { IntroScreen, Progress, OptionCard, GoodToKnow, GroomsSay, AffLink, type Answers, type Question, type Option } from "../shared";
 import { usePersistentState } from "../persistence";
 import { encodeHandover } from "../handover-codec";
@@ -839,8 +839,11 @@ export function StagModule({ groomName }: { groomName?: string }) {
       steps={["Type", "His vibe", "Region", "Group size", "Budget", "Destination", "Transport"]}
       ctaLabel="Find your stag"
       quote="We spent three weeks in a WhatsApp group going in circles. Wish we had just made the decisions in order like this."
-      quoteAuthor="u/stagorganiser"
-      illustration={<div style={{ display: "flex", gap: 16 }}><CityIllus city="krakow" /><CityIllus city="valThorens" /></div>}
+      quoteAuthor="A best man, on Reddit"
+      plates={[
+        { img: DESTINATION_PHOTOS["budapest"]?.imageUrl || "", caption: "Budapest", credit: DESTINATION_PHOTOS["budapest"] && { name: DESTINATION_PHOTOS["budapest"].photographer, url: DESTINATION_PHOTOS["budapest"].photographerUrl } },
+        { img: DESTINATION_PHOTOS["chamonix"]?.imageUrl || "", caption: "Chamonix", credit: DESTINATION_PHOTOS["chamonix"] && { name: DESTINATION_PHOTOS["chamonix"].photographer, url: DESTINATION_PHOTOS["chamonix"].photographerUrl } },
+      ].filter(p => p.img)}
       onStart={() => setPhase("journey")}
       secondaryLabel="Or jump straight to the guest list"
       onSecondary={() => setPhase("organiser")}

@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import { T } from "./theme";
 
 export type Quote = { quote: string; author: string };
+export type Plate = { img: string; caption: string; credit?: { name: string; url: string } };
 export type AffLinkData = { label: string; url: string };
 export type OptionMeta = Record<string, string>;
 export type Option = {
@@ -106,7 +107,7 @@ export function Progress({ step, total, onBack }: { step: number; total: number;
   );
 }
 
-export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAuthor, onStart, illustration, secondaryLabel, onSecondary, ctaLabel }: {
+export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAuthor, onStart, illustration, secondaryLabel, onSecondary, ctaLabel, plates }: {
   eyebrow: string;
   title: string;
   description: string;
@@ -118,15 +119,18 @@ export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAu
   secondaryLabel?: string;
   onSecondary?: () => void;
   ctaLabel?: string;
+  plates?: Plate[];
 }) {
-  return (
-    <div style={{ maxWidth: 680 }}>
+  const hasPlates = !!plates && plates.length > 0;
+
+  const textColumn = (
+    <div style={{ maxWidth: 560 }}>
       <div style={{ display: "flex", gap: 6, alignItems: "center", marginBottom: 12 }}>
         <div style={{ width: 20, height: 1.5, background: T.mid, borderRadius: 1 }} />
         <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: T.mid }}>{eyebrow}</div>
       </div>
-      <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 42, color: T.ink, lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.01em", maxWidth: 560 }}>{title}</h2>
-      <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.7, marginBottom: steps ? 18 : 28, maxWidth: 540 }}>{description}</p>
+      <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 42, color: T.ink, lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.01em" }}>{title}</h2>
+      <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.7, marginBottom: steps ? 18 : 28, maxWidth: 480 }}>{description}</p>
 
       {steps && (
         <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid, marginBottom: 28, lineHeight: 2 }}>
@@ -150,16 +154,49 @@ export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAu
       </div>
 
       {(quote || illustration) && (
-        <div style={{ display: "flex", gap: 32, alignItems: "center", marginTop: 44, paddingTop: 24, borderTop: "1px solid " + T.rule, flexWrap: "wrap", maxWidth: 560 }}>
+        <div style={{ display: "flex", gap: 32, alignItems: "center", marginTop: 40, paddingTop: 22, borderTop: "1px solid " + T.rule, flexWrap: "wrap", maxWidth: 480 }}>
           {illustration && <div className="intro-illus" style={{ flexShrink: 0 }}>{illustration}</div>}
           {quote && (
             <div style={{ flex: 1, minWidth: 200 }}>
               <div style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", fontSize: 15, color: T.mid, lineHeight: 1.6, marginBottom: 6 }}>"{quote}"</div>
-              <div style={{ fontSize: 11, color: T.mid, opacity: 0.8 }}>{quoteAuthor}</div>
+              <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, opacity: 0.8 }}>{quoteAuthor}</div>
             </div>
           )}
         </div>
       )}
+    </div>
+  );
+
+  if (!hasPlates) return <div style={{ maxWidth: 680 }}>{textColumn}</div>;
+
+  return (
+    <div className="intro-spread" style={{ maxWidth: 1080, paddingTop: 12 }}>
+      {textColumn}
+      <div className="intro-plates" style={{ position: "relative", height: 440, minWidth: 0 }}>
+        {plates!.slice(0, 2).map((p, i) => (
+          <div key={i} style={{
+            position: "absolute",
+            ...(i === 0
+              ? { top: 0, right: 12, width: "58%", transform: "rotate(1.5deg)", zIndex: 1 }
+              : { bottom: 0, left: 0, width: "50%", transform: "rotate(-2deg)", zIndex: 2 }),
+            background: "#FFFFFF", border: "1px solid " + T.rule, padding: "12px 12px 10px",
+            boxShadow: "0 8px 28px rgba(27,44,51,0.10)",
+          }}>
+            <div style={{ width: "100%", aspectRatio: "4 / 5", overflow: "hidden", background: "#EDEAE6", position: "relative" }}>
+              <img src={p.img} alt={p.caption} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              {p.credit && p.credit.name && (
+                <a href={p.credit.url} target="_blank" rel="noopener noreferrer"
+                  style={{ position: "absolute", bottom: 5, left: 7, fontSize: 9, color: "rgba(255,255,255,0.85)", textShadow: "0 1px 3px rgba(0,0,0,0.6)", textDecoration: "none", fontFamily: "Inter, sans-serif" }}>
+                  Photo: {p.credit.name}
+                </a>
+              )}
+            </div>
+            <div style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: T.mid, textAlign: "center", marginTop: 9 }}>
+              {["Plate I", "Plate II"][i]} &mdash; {p.caption}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

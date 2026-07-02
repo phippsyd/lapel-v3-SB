@@ -543,6 +543,24 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
   );
 }
 
+// ── INTRO PLATES ──────────────────────────────────────────────────────────
+// Paste your chosen Unsplash images here. For each: the images.unsplash.com
+// URL (add ?w=900&q=80 if not present), a short caption, and the
+// photographer's name + profile URL for the licence credit.
+// The intro renders single-column until at least one img is filled in.
+const INTRO_PLATES = [
+  {
+    img: "https://images.unsplash.com/photo-1532207733185-fc73ca0a54b5?q=80&w=900&auto=format&fit=crop",
+    caption: "The jacket",
+    credit: { name: "Hermes Rivera", url: "https://unsplash.com/@hermez777" },
+  },
+  {
+    img: "https://images.unsplash.com/photo-1604531826248-f0eca8eeb896?q=80&w=900&auto=format&fit=crop",
+    caption: "The details",
+    credit: { name: "Nathan Walker", url: "https://unsplash.com/@nwphoto" },
+  },
+];
+
 export function AttireModule() {
   const [phase, setPhase] = useState<"intro" | "journey" | "result">("intro");
   const [answers, setAnswers] = useState<Answers>({});
@@ -561,10 +579,11 @@ export function AttireModule() {
       description="Lapels, cuffs, knots, pockets — every choice your fitting will throw at you, explained before you're stood at the counter. Pick as you go, or just look. Undecided is fine."
       steps={["Style", "Hire or buy", "Lapel", "Colour", "Details", "Shoes"]}
       quote="I wish I'd done this before my first fitting. I didn't even know what lapel I wanted and the guy behind the counter just picked for me."
-      quoteAuthor="u/groomadvice_uk"
+      quoteAuthor="A groom, on Reddit"
       illustration={undefined}
       onStart={() => setPhase("journey")}
       ctaLabel="See the decisions"
+      plates={INTRO_PLATES.filter(p => p.img)}
     />
   );
 
