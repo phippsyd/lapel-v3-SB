@@ -49,3 +49,18 @@ p {
     grid-template-columns: 1fr;
   }
 }
+
+.intro-spread {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+}
+@media (max-width: 940px) {
+  .intro-spread {
+    grid-template-columns: 1fr;
+  }
+  .intro-plates {
+    display: none;
+  }
+}
