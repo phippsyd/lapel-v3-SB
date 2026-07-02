@@ -226,8 +226,8 @@ export default function Lapel() {
               <div style={{ maxWidth: 720 }}>
                 <h1 className="hero-title" style={{ fontFamily: "'DM Serif Display', serif", fontSize: 62, color: "white", lineHeight: 1.02, marginBottom: 20, letterSpacing: "-0.02em", textAlign: "left" }}>
                   {displayProfile.groomName
-                    ? <>The only comprehensive<br />guide built for you,<br />{displayProfile.groomName}.</>
-                    : <>The only comprehensive<br />guide built for the groom.</>
+                    ? <>Thee only comprehensive<br />guide built for you,<br />{displayProfile.groomName}.</>
+                    : <>Thee only comprehensive<br />guide built for the groom.</>
                   }
                 </h1>
                 <div style={{ height: 1, background: "rgba(255,255,255,0.12)", marginBottom: 20 }} />
