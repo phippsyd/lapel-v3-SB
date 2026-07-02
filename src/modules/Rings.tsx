@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { T } from "../theme";
-import { IntroScreen, Journey, type Answers, type Question } from "../shared";
+import { IntroScreen, Journey, AffLink, type Answers, type Question } from "../shared";
 
 const questions: Question[] = [
   { key: "match", question: "Do you want to match her ring?", sub: "Most couples do not realise this is even a decision until they are ring shopping.", education: "Her engagement ring is likely platinum or white gold. Yellow gold beside platinum will contrast — some couples love this, others prefer to coordinate. Decide before you start looking at metals.",
@@ -138,22 +138,16 @@ export function RingsModule() {
   if (phase === "journey") return <Journey questions={questions} onComplete={(a) => { setAnswers(a); setPhase("result"); }} />;
 
   const links = MAT_LINKS[answers.material] || [];
+  const rowLabels: Record<string, string> = { match: "Match or contrast", material: "Material", width: "Width", finish: "Finish", budget: "Budget", engraving: "Engraving" };
+  const optionFor = (key: string) => questions.find(q => q.key === key)?.options.find(o => (o.id || o.label) === answers[key]);
   return (
     <div>
       <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 34, color: T.ink, marginBottom: 6 }}>Your ring.</div>
       <div style={{ fontSize: 14, color: T.mid, marginBottom: 24 }}>Based on your choices, here is exactly where to find it.</div>
-      <div style={{ background: T.white, border: "1px solid " + T.rule, borderRadius: 4, overflow: "hidden", marginBottom: 32 }}>
-        {Object.entries(answers).map(([k, v], i, arr) => (
-          <div key={k} style={{ display: "flex", gap: 20, padding: "14px 24px", borderBottom: i < arr.length - 1 ? "1px solid " + T.rule : "none" }}>
-            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid, minWidth: 120 }}>{k}</div>
-            <div style={{ fontSize: 14, color: T.ink, fontWeight: 500 }}>{v}</div>
-          </div>
-        ))}
-      </div>
       {links.length > 0 && (
         <>
-          <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 24, color: T.ink, marginBottom: 20 }}>Where to find this ring</div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 14 }}>Where to find this ring</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 36 }}>
             {links.map((link, i) => (
               <a key={i} href={link.url} target="_blank" rel="noopener noreferrer"
                 style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: T.white, border: "1px solid " + T.rule, borderRadius: 4, padding: "18px 24px", textDecoration: "none" }}
@@ -166,6 +160,19 @@ export function RingsModule() {
           </div>
         </>
       )}
+      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 14 }}>The sheet</div>
+      <div style={{ background: T.white, border: "1px solid " + T.rule, borderRadius: 4, overflow: "hidden", marginBottom: 32 }}>
+        {Object.entries(answers).map(([k], i, arr) => {
+          const opt = optionFor(k);
+          return (
+            <div key={k} style={{ display: "flex", gap: 20, padding: "14px 24px", borderBottom: i < arr.length - 1 ? "1px solid " + T.rule : "none", alignItems: "baseline", flexWrap: "wrap" }}>
+              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid, minWidth: 130 }}>{rowLabels[k] || k}</div>
+              <div style={{ fontSize: 14, color: T.ink, fontWeight: 500, flex: 1 }}>{opt?.label || answers[k]}</div>
+              {opt?.aff && <AffLink label={opt.aff.label} url={opt.aff.url} />}
+            </div>
+          );
+        })}
+      </div>
       <button onClick={() => { setPhase("intro"); setAnswers({}); }} style={{ background: "none", border: "1px solid " + T.rule, color: T.mid, padding: "12px 20px", fontSize: 12, fontWeight: 600, cursor: "pointer", borderRadius: 2 }}>Start over</button>
     </div>
   );
