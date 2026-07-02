@@ -835,8 +835,9 @@ export function StagModule({ groomName }: { groomName?: string }) {
     <IntroScreen
       eyebrow="Stag · Planning guide"
       title="Find the right stag for your group."
-      description="From a ski trip in Whistler to a night in Belgrade to a hired house in the Lake District — this covers every type of stag, filters to what suits your group, and gives you the information you need to actually plan it. Not just a destination list."
+      description="Skiing in Whistler, a night in Belgrade, a house in the Lakes — every type of stag and nearly 200 destinations, filtered to your group."
       steps={["Type", "His vibe", "Region", "Group size", "Budget", "Destination", "Transport"]}
+      ctaLabel="Find your stag"
       quote="We spent three weeks in a WhatsApp group going in circles. Wish we had just made the decisions in order like this."
       quoteAuthor="u/stagorganiser"
       illustration={<div style={{ display: "flex", gap: 16 }}><CityIllus city="krakow" /><CityIllus city="valThorens" /></div>}

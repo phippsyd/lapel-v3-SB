@@ -437,7 +437,7 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
     { name: "ASOS", desc: "Budget-friendly option. Good for younger grooms or if this is a one-wear occasion.", url: "https://www.asos.com/men/suits" },
   ];
 
-  const suppliers = isHire ? hireSuppliers : buySuppliers;
+  const suppliers = !answers.hireBuy || isHire ? hireSuppliers : buySuppliers;
 
   const shoeAffiliate: Record<string, { label: string; url: string }> = {
     oxford: { label: "Browse Oxfords at Loake", url: "https://www.loake.co.uk" },
@@ -450,10 +450,10 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
   return (
     <div style={{ maxWidth: 760 }}>
       <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 34, color: T.ink, marginBottom: 8 }}>
-        Your look.
+        Your fitting sheet.
       </div>
       <div style={{ fontSize: 14, color: T.mid, marginBottom: 36, lineHeight: 1.65 }}>
-        Take this to your fitting. Not every shop stocks every style — go in knowing what you want rather than deciding under pressure at the counter.
+        Everything you leaned towards, in the language the shop will use. Anything you skipped, you now know exists — ask to see it in person before you rule it out.
       </div>
 
       {visualCards.length > 0 && (
@@ -496,7 +496,9 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
           Where to go
         </div>
         <div style={{ fontSize: 14, color: T.mid, lineHeight: 1.65, marginBottom: 20 }}>
-          {isHire
+          {!answers.hireBuy
+            ? "Still weighing hire against buying? Book a hire fitting first — they're free, no obligation, and an hour in front of a mirror will tell you more than any guide."
+            : isHire
             ? "Most hire shops offer free fittings with no obligation. Book two or three and compare — styles and stock vary significantly between retailers."
             : "Prices and styles vary considerably. Start at two or three of these before committing — and always try before you buy."}
         </div>
@@ -554,14 +556,15 @@ export function AttireModule() {
 
   if (phase === "intro") return (
     <IntroScreen
-      eyebrow="Attire · Decision guide"
-      title="Know what you want before you walk into a store."
-      description="Most fittings move fast and not every shop stocks every style. Go through your options here first — so when you walk in, you already know what you're looking for. Takes about 3 minutes."
+      eyebrow="Attire · The field guide"
+      title="The decisions you didn't know you'd have to make."
+      description="Lapels, cuffs, knots, pockets — every choice your fitting will throw at you, explained before you're stood at the counter. Pick as you go, or just look. Undecided is fine."
       steps={["Style", "Hire or buy", "Lapel", "Colour", "Details", "Shoes"]}
       quote="I wish I'd done this before my first fitting. I didn't even know what lapel I wanted and the guy behind the counter just picked for me."
       quoteAuthor="u/groomadvice_uk"
       illustration={undefined}
       onStart={() => setPhase("journey")}
+      ctaLabel="See the decisions"
     />
   );
 
@@ -570,6 +573,7 @@ export function AttireModule() {
       questions={buildQuestions(answers)}
       onAnswerChange={(partial: Answers) => setAnswers(prev => ({ ...prev, ...partial }))}
       onComplete={handleComplete}
+      skippable
     />
   );
 

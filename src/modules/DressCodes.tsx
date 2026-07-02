@@ -457,14 +457,13 @@ export function DressCodesModule() {
 
   return (
     <div>
-      <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: T.mid, marginBottom: 14 }}>Reference</div>
-      <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 38, color: T.ink, lineHeight: 1.1, marginBottom: 16 }}>Dress codes decoded.</div>
-      <div style={{ height: 1, background: T.rule, marginBottom: 24 }} />
-      <div style={{ fontSize: 15, color: T.mid, lineHeight: 1.7, maxWidth: 560, marginBottom: 24 }}>
-        Every dress code you might encounter on a UK wedding invitation, with honest guidance on what to actually wear.
+      <div style={{ display: "flex", gap: 6, alignItems: "center", marginBottom: 12 }}>
+        <div style={{ width: 20, height: 1.5, background: T.mid, borderRadius: 1 }} />
+        <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: T.mid }}>Dress codes · Reference</div>
       </div>
-      <div style={{ fontSize: 13, color: T.mid, lineHeight: 1.75, maxWidth: 600, padding: "16px 20px", background: T.paper, border: "1px solid " + T.rule, borderRadius: 4, marginBottom: 40 }}>
-        Some UK dress codes — white tie, black tie, morning dress — are standardised and precise. Others — lounge suit, smart casual, garden party — are broad instructions that depend heavily on the venue, the time of day, and the tone of the invitation. When in doubt, dress slightly above rather than below: you can always remove a tie or jacket, but you cannot undo underdressing.
+      <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 42, color: T.ink, lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.01em" }}>Dress codes, decoded.</div>
+      <div style={{ fontSize: 15, color: T.mid, lineHeight: 1.7, maxWidth: 560, marginBottom: 32 }}>
+        Every code a UK invitation can throw at you. When in doubt, dress slightly above — you can always remove a tie, but you cannot undo underdressing.
       </div>
 
       <div style={{
