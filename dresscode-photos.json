@@ -1,0 +1,68 @@
+{
+  "white-tie": {
+    "imageUrl": "https://images.unsplash.com/photo-1518049737507-55dc3314b311?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHx3aGl0ZSUyMHRpZSUyMHRhaWxjb2F0JTIwZm9ybWFsJTIwbWVuc3dlYXJ8ZW58MHwwfHx8MTc4Mjg0NDE0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "Marcus Lewis",
+    "photographerUrl": "https://unsplash.com/@marcusvlewis",
+    "unsplashUrl": "https://unsplash.com/photos/white-petaled-flower-on-mans-lapel-s7nDxIfbD6o"
+  },
+  "black-tie": {
+    "imageUrl": "https://images.unsplash.com/photo-1694394181749-50dcca5463d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMHRpZSUyMHR1eGVkbyUyMGdyb29tJTIwZm9ybWFsfGVufDB8MHx8fDE3ODI4NDQxNTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "Jennifer Kalenberg",
+    "photographerUrl": "https://unsplash.com/@jkalen71",
+    "unsplashUrl": "https://unsplash.com/photos/a-group-of-men-standing-next-to-each-other-dNHiY95IY3s"
+  },
+  "black-tie-optional": {
+    "imageUrl": "https://images.unsplash.com/photo-1612325430161-94c758c7f330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHx0dXhlZG8lMjBkYXJrJTIwc3VpdCUyMGZvcm1hbCUyMGV2ZW5pbmclMjBtZW5zd2VhcnxlbnwwfDB8fHwxNzgyODQ0MTUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "zero take",
+    "photographerUrl": "https://unsplash.com/@zerotake",
+    "unsplashUrl": "https://unsplash.com/photos/man-in-black-suit-standing-near-brown-wooden-door-S0XrGPt6NCQ"
+  },
+  "formal": {
+    "imageUrl": "https://images.unsplash.com/photo-1529635229076-82fefed713c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxmb3JtYWwlMjBzdWl0JTIwbWVuc3dlYXIlMjB3ZWRkaW5nJTIwZ3Vlc3R8ZW58MHwwfHx8MTc4Mjg0NDE1M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "Samantha Gades",
+    "photographerUrl": "https://unsplash.com/@srosinger3997",
+    "unsplashUrl": "https://unsplash.com/photos/standing-man-holding-his-notched-lapel-suit-jackets-button-bFYoyKivbmg"
+  },
+  "morning-dress": {
+    "imageUrl": "https://images.unsplash.com/photo-1664646327030-339b85a9bd43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxtb3JuaW5nJTIwZHJlc3MlMjBncmV5JTIwdGFpbGNvYXQlMjB3ZWRkaW5nfGVufDB8MHx8fDE3ODI4NDQxNTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "Christophe Dusabe",
+    "photographerUrl": "https://unsplash.com/@bronzeshooter",
+    "unsplashUrl": "https://unsplash.com/photos/a-group-of-men-in-suits-walking-1QtaaB8knv8"
+  },
+  "lounge-suit": {
+    "imageUrl": "https://images.unsplash.com/flagged/photo-1571582159131-b6fcd22646c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxuYXZ5JTIwc3VpdCUyMG1lbnN3ZWFyJTIwd2VkZGluZyUyMGd1ZXN0fGVufDB8MHx8fDE3ODI4NDQxNTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "Miguel Teirlinck",
+    "photographerUrl": "https://unsplash.com/@miguelteirlinck",
+    "unsplashUrl": "https://unsplash.com/photos/shallow-focus-photo-of-man-in-blue-suit-jacket--C_jBnIb88g"
+  },
+  "cocktail-attire": {
+    "imageUrl": "https://images.unsplash.com/photo-1489370603040-dc6c28a1d37a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxjb2NrdGFpbCUyMGF0dGlyZSUyMHN1aXQlMjBldmVuaW5nJTIwbWVuc3dlYXJ8ZW58MHwwfHx8MTc4Mjg0NDE2MHww&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "Alvin Mahmudov",
+    "photographerUrl": "https://unsplash.com/@alvinmahmudov",
+    "unsplashUrl": "https://unsplash.com/photos/a-mans-hands-adjusting-the-cuffs-of-his-black-suit-DnJioJ8nhxI"
+  },
+  "smart-casual": {
+    "imageUrl": "https://images.unsplash.com/photo-1517938889432-a2ac9241a486?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxzbWFydCUyMGNhc3VhbCUyMGJsYXplciUyMG1lbnN3ZWFyfGVufDB8MHx8fDE3ODI4NDQxNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "bruce mars",
+    "photographerUrl": "https://unsplash.com/@brucemars",
+    "unsplashUrl": "https://unsplash.com/photos/selective-focus-photography-of-man-wear-brown-blazer-and-eyeglasses-qNF8jx8ZsFY"
+  },
+  "garden-party": {
+    "imageUrl": "https://images.unsplash.com/photo-1688573156632-4fe3c42e73c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxnYXJkZW4lMjBwYXJ0eSUyMHN1bW1lciUyMHN1aXQlMjBtZW5zd2VhcnxlbnwwfDB8fHwxNzgyODQ0MTY0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "Elijah Crouch",
+    "photographerUrl": "https://unsplash.com/@elijahbcrouch",
+    "unsplashUrl": "https://unsplash.com/photos/two-men-sitting-in-chairs-in-a-yard-h0MuJpC1YaY"
+  },
+  "festive-winter": {
+    "imageUrl": "https://images.unsplash.com/photo-1523844051804-16488e54e099?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHx3aW50ZXIlMjB3ZWRkaW5nJTIwc3VpdCUyMHR3ZWVkJTIwbWVuc3dlYXJ8ZW58MHwwfHx8MTc4Mjg0NDE2NXww&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "Heather Miller",
+    "photographerUrl": "https://unsplash.com/@heathamilla",
+    "unsplashUrl": "https://unsplash.com/photos/man-wearing-gray-notched-lapel-blazer-gray-waistcoat-and-white-dress-shirt-with-rose-buttonaire-l0tUcB6kyNA"
+  },
+  "beach-destination": {
+    "imageUrl": "https://images.unsplash.com/photo-1725044542600-c6f40914519a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxsaW5lbiUyMHN1aXQlMjBiZWFjaCUyMHdlZGRpbmclMjBtZW5zd2VhcnxlbnwwfDB8fHwxNzgyODQ0MTY3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "photographer": "Javier González Fotógrafo",
+    "photographerUrl": "https://unsplash.com/@livingcolortj",
+    "unsplashUrl": "https://unsplash.com/photos/a-group-of-men-standing-next-to-each-other-F7mnt-GW-a4"
+  }
+}
