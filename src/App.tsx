@@ -143,7 +143,6 @@ export default function Lapel() {
       style={{ fontFamily: "Inter, sans-serif", background: T.paper, minHeight: "100vh", color: T.ink }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         ::placeholder { color: #B5B1AC; }
         textarea:focus, input:focus { border-color: #616E64 !important; outline: none; }
