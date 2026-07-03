@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /image-audit
+Disallow: /profile
+
+Sitemap: https://www.lapelguide.co.uk/sitemap.xml

@@ -1,17 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { T } from "./theme";
 import type { Profile } from "./shared";
 import { usePersistentState } from "./persistence";
-import { AttireModule } from "./modules/Attire";
-import { RingsModule } from "./modules/Rings";
-import { DressCodesModule } from "./modules/DressCodes";
-import { StagModule, DESTINATION_PHOTOS } from "./modules/Stag";
-import { SpeechModule } from "./modules/Speech";
-import { FAQModule } from "./modules/FAQ";
-import { ProfileModule } from "./modules/Profile";
-import { ImageAuditModule } from "./modules/ImageAudit";
-import { HandoverView } from "./modules/Handover";
 import { decodeHandover, type HandoverPayload } from "./handover-codec";
+
+// Route-level code splitting: each module loads only when visited, keeping
+// the initial bundle small (page speed is a ranking factor).
+const AttireModule = lazy(() => import("./modules/Attire").then(m => ({ default: m.AttireModule })));
+const RingsModule = lazy(() => import("./modules/Rings").then(m => ({ default: m.RingsModule })));
+const DressCodesModule = lazy(() => import("./modules/DressCodes").then(m => ({ default: m.DressCodesModule })));
+const StagModule = lazy(() => import("./modules/Stag").then(m => ({ default: m.StagModule })));
+const SpeechModule = lazy(() => import("./modules/Speech").then(m => ({ default: m.SpeechModule })));
+const FAQModule = lazy(() => import("./modules/FAQ").then(m => ({ default: m.FAQModule })));
+const ProfileModule = lazy(() => import("./modules/Profile").then(m => ({ default: m.ProfileModule })));
+const ImageAuditModule = lazy(() => import("./modules/ImageAudit").then(m => ({ default: m.ImageAuditModule })));
+const HandoverView = lazy(() => import("./modules/Handover").then(m => ({ default: m.HandoverView })));
+
+// Homepage hero photo (licensed Unsplash, credit required) — inlined rather
+// than imported from Stag so the Stag chunk stays out of the initial load.
+const HERO_STAG_PHOTO = {
+  imageUrl: "https://images.unsplash.com/photo-1553355202-f869c36581ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900",
+  photographer: "Philipp Trubchenko",
+  photographerUrl: "https://unsplash.com/@seresigo",
+};
 
 const MODULES = [
   {
@@ -105,14 +116,65 @@ const MODULES = [
 
 type ModuleId = (typeof MODULES)[number]["id"] | "profile" | "imageaudit";
 
+// ── ROUTING + SEO ─────────────────────────────────────────────────────────
+// Each module is a real URL so Google can index every guide separately.
+// PATHS/SEO here must stay in sync with scripts/postbuild-seo.mjs, which
+// bakes the same titles into per-route static HTML at build time.
+const PATHS: Record<ModuleId, string> = {
+  attire: "/attire", rings: "/rings", dresscodes: "/dress-codes", stag: "/stag",
+  speech: "/speech", faq: "/faq", profile: "/profile", imageaudit: "/image-audit",
+};
+const ROUTES: Record<string, ModuleId> = Object.fromEntries(
+  Object.entries(PATHS).map(([id, p]) => [p, id as ModuleId])
+);
+const SEO: Record<"home" | ModuleId, { title: string; desc: string }> = {
+  home: { title: "Lapel — The Groom's Complete Wedding Guide", desc: "Every decision a groom actually has to make — attire, rings, stag, speech and dress codes. Comprehensive, UK-specific, free." },
+  attire: { title: "Wedding Suit Guide for Grooms — Every Decision Explained | Lapel", desc: "Lapels, cuffs, colours, hire vs buy — every suit decision a groom faces, explained before the fitting. Build your fitting sheet." },
+  rings: { title: "Men's Wedding Rings — Every Option Compared | Lapel", desc: "Platinum to tungsten to silicone to a ring tattoo — every men's wedding ring option compared, with where to buy in the UK." },
+  dresscodes: { title: "UK Wedding Dress Codes Explained — Black Tie to Smart Casual | Lapel", desc: "Every UK wedding dress code decoded — white tie, black tie, morning dress, lounge suit and more, with honest guidance on what to wear." },
+  stag: { title: "Stag Do Ideas — Nearly 200 Destinations Compared | Lapel", desc: "Plan the stag properly: every type of stag do and nearly 200 destinations, filtered by group, budget and vibe, with booking links." },
+  speech: { title: "The Groom's Speech — How to Write and Deliver It | Lapel", desc: "How to write a groom's speech that lands: structure, thank-yous, jokes that work, and a builder to write yours now." },
+  faq: { title: "Groom Questions, Answered Honestly | Lapel", desc: "Which buttons to fasten, how much cuff to show, when to take the jacket off — every question grooms are too embarrassed to ask." },
+  profile: { title: "My Profile | Lapel", desc: "Your wedding details and saved guides on Lapel." },
+  imageaudit: { title: "Image Audit | Lapel", desc: "Internal image audit." },
+};
+const pathToModule = (pathname: string): ModuleId | null => {
+  const clean = ("/" + pathname.replace(/^\/+|\/+$/g, "")).toLowerCase();
+  return clean === "/" ? null : ROUTES[clean] ?? null;
+};
+
 export default function Lapel() {
   const [profile, setProfile] = usePersistentState<Profile>("profile", { groomName: "", partnerName: "", weddingDate: "", venue: "" });
-  const [active, setActive] = useState<ModuleId | null>(null);
+  const [active, setActiveState] = useState<ModuleId | null>(() => pathToModule(window.location.pathname));
   const [handover, setHandover] = useState<HandoverPayload | null>(() => {
     const h = window.location.hash;
     if (h.startsWith("#handover=")) return decodeHandover(h.slice("#handover=".length));
     return null;
   });
+
+  // Navigation updates the URL so every guide is a real, shareable address.
+  const navigate = (id: ModuleId | null) => {
+    setActiveState(id);
+    const path = id ? PATHS[id] : "/";
+    if (window.location.pathname !== path) window.history.pushState(null, "", path);
+    window.scrollTo(0, 0);
+  };
+  const setActive = navigate;
+
+  // Browser back/forward buttons drive the app state.
+  useEffect(() => {
+    const onPop = () => setActiveState(pathToModule(window.location.pathname));
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  // Per-route title + meta description (mirrors the static HTML the
+  // postbuild script generates, keeping tab titles right during SPA nav).
+  useEffect(() => {
+    const meta = SEO[active ?? "home"];
+    document.title = meta.title;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", meta.desc);
+  }, [active]);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 8);
@@ -208,7 +270,7 @@ export default function Lapel() {
       </div>
 
       {handover ? (
-        <HandoverView
+        <Suspense fallback={<div style={{ padding: "64px 24px", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid }}>Loading&hellip;</div>}><HandoverView
           payload={handover}
           onExplore={() => {
             history.replaceState(null, "", window.location.pathname);
@@ -216,7 +278,7 @@ export default function Lapel() {
             setActive("stag");
             window.scrollTo(0, 0);
           }}
-        />
+        /></Suspense>
       ) : !active ? (
         <div>
           {/* Hero */}
@@ -241,7 +303,7 @@ export default function Lapel() {
                 <div className="intro-plates" style={{ position: "relative", height: 340, minWidth: 0 }}>
                   {[
                     { img: "https://images.unsplash.com/photo-1506072590044-75de1b7b7806?q=80&w=900&auto=format&fit=crop", caption: "The attire", credit: { name: "Soroush Karimi", url: "https://unsplash.com/@soroushkarimi" } },
-                    { img: DESTINATION_PHOTOS["budapest"]?.imageUrl || "", caption: "The stag", credit: DESTINATION_PHOTOS["budapest"] && { name: DESTINATION_PHOTOS["budapest"].photographer, url: DESTINATION_PHOTOS["budapest"].photographerUrl } },
+                    { img: HERO_STAG_PHOTO.imageUrl, caption: "The stag", credit: { name: HERO_STAG_PHOTO.photographer, url: HERO_STAG_PHOTO.photographerUrl } },
                   ].filter(p => p.img).map((p, i) => (
                     <div key={i} style={{
                       position: "absolute",
@@ -321,7 +383,7 @@ export default function Lapel() {
             style={{ background: "none", border: "none", fontSize: 11, fontWeight: 600, color: T.navy, letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer", marginBottom: 22, display: "flex", alignItems: "center", gap: 6, fontFamily: "Inter, sans-serif" }}>
             <span style={{ fontSize: 14 }}>&larr;</span> Back to guides
           </button>
-          {renderModule()}
+          <Suspense fallback={<div style={{ padding: "64px 0", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid }}>Loading&hellip;</div>}>{renderModule()}</Suspense>
         </div>
       )}
     </div>
