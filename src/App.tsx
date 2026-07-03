@@ -143,7 +143,6 @@ export default function Lapel() {
       style={{ fontFamily: "Inter, sans-serif", background: T.paper, minHeight: "100vh", color: T.ink }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         ::placeholder { color: #B5B1AC; }
         textarea:focus, input:focus { border-color: #616E64 !important; outline: none; }
@@ -225,7 +224,7 @@ export default function Lapel() {
             <div style={{ maxWidth: 1080, margin: "0 auto", width: "100%" }}>
               <div className="intro-spread">
                 <div style={{ maxWidth: 560 }}>
-                  <h1 className="hero-title" style={{ fontFamily: "'DM Serif Display', serif", fontSize: 54, color: "white", lineHeight: 1.06, marginBottom: 18, letterSpacing: "-0.02em", textAlign: "left" }}>
+                  <h1 className="hero-title" style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: 54, color: "white", lineHeight: 1.06, marginBottom: 18, letterSpacing: "-0.02em", textAlign: "left" }}>
                     {displayProfile.groomName
                       ? <>Every decision you actually<br />have to make, {displayProfile.groomName}.</>
                       : <>Every decision a groom<br />actually has to make.</>
