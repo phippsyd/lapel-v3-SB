@@ -329,95 +329,6 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
   onSave: () => void;
   onRestart: () => void;
 }) {
-  type VisualCard = { label: string; value: string; img: string };
-  const visualCards: VisualCard[] = [];
-
-  const lapelImgMap: Record<string, string> = {
-    notched: "/images/LAPEL_STYLES/lapel-notched.png",
-    peaked: "/images/LAPEL_STYLES/lapel-peak.png",
-    shawl: "/images/LAPEL_STYLES/lapel-shawl.png",
-    mandarin: "/images/LAPEL_STYLES/lapel-mandarin.png",
-  };
-
-  const shoeImgMap: Record<string, string> = {
-    oxford: "/images/SHOES/shoe-oxford.png",
-    derby: "/images/SHOES/shoe-derby.png",
-    patent: "/images/SHOES/shoe-patent-oxford.png",
-    loafer: "/images/SHOES/shoe-loafer.png",
-  };
-
-  const buttonStanceImgMap: Record<string, string> = {
-    sb1: "/images/JACKET_BUTTON_STANCE/jacket-single-1-button.png",
-    sb2: "/images/JACKET_BUTTON_STANCE/jacket-single-2-button.png",
-    sb3: "/images/JACKET_BUTTON_STANCE/jacket-single-3-button.png",
-    db4: "/images/JACKET_BUTTON_STANCE/jacket-double-4x2.png",
-    db6: "/images/JACKET_BUTTON_STANCE/jacket-double-6x2.png",
-  };
-
-  const pocketSquareImgMap: Record<string, string> = {
-    flat: "/images/POCKET_SQUARES/pocket-square-flat-fold.png",
-    "one-point": "/images/POCKET_SQUARES/pocket-square-one-point.png",
-    "two-point": "/images/POCKET_SQUARES/pocket-square-two-point.png",
-    puff: "/images/POCKET_SQUARES/pocket-square-puff-fold.png",
-  };
-
-  if (answers.lapel && lapelImgMap[answers.lapel]) {
-    const lapelLabels: Record<string, string> = {
-      notched: "Notched lapel",
-      peaked: "Peak lapel",
-      shawl: "Shawl lapel",
-      mandarin: "Mandarin / collarless",
-    };
-    visualCards.push({ label: "Lapel", value: lapelLabels[answers.lapel] || answers.lapel, img: lapelImgMap[answers.lapel] });
-  }
-
-  if (answers.buttonStance && buttonStanceImgMap[answers.buttonStance]) {
-    const stanceLabels: Record<string, string> = {
-      sb1: "1-button",
-      sb2: "2-button",
-      sb3: "3-button",
-      db4: "Double-breasted 4x2",
-      db6: "Double-breasted 6x2",
-    };
-    visualCards.push({ label: "Button stance", value: stanceLabels[answers.buttonStance] || answers.buttonStance, img: buttonStanceImgMap[answers.buttonStance] });
-  }
-
-  if (answers.shoes && shoeImgMap[answers.shoes]) {
-    const shoeLabels: Record<string, string> = {
-      oxford: "Oxford",
-      derby: "Derby",
-      patent: "Patent Oxford",
-      loafer: "Loafer",
-    };
-    visualCards.push({ label: "Shoes", value: shoeLabels[answers.shoes] || answers.shoes, img: shoeImgMap[answers.shoes] });
-  }
-
-  if (answers.pocketSquareFold && pocketSquareImgMap[answers.pocketSquareFold]) {
-    const foldLabels: Record<string, string> = {
-      flat: "Flat fold",
-      "one-point": "One-point fold",
-      "two-point": "Two-point fold",
-      puff: "Puff fold",
-    };
-    visualCards.push({ label: "Pocket square", value: foldLabels[answers.pocketSquareFold] || answers.pocketSquareFold, img: pocketSquareImgMap[answers.pocketSquareFold] });
-  }
-
-  const detailRows = [
-    { key: "style", label: "Style" },
-    { key: "hireBuy", label: "Hire or buy" },
-    { key: "colour", label: "Colour" },
-    { key: "waistcoat", label: "Waistcoat" },
-    { key: "waistOrCummerbund", label: "Waist covering" },
-    { key: "tuxShirtCollar", label: "Shirt collar" },
-    { key: "tuxShirtFront", label: "Shirt front" },
-    { key: "tuxNeckwear", label: "Neckwear" },
-    { key: "tieKnot", label: "Tie knot" },
-    { key: "tuxCuffs", label: "Cuffs" },
-    { key: "trousers", label: "Trousers" },
-    { key: "groomsmen", label: "Groomsmen" },
-    { key: "finishing", label: "Finishing" },
-  ].filter(r => answers[r.key]);
-
   const isHire = answers.hireBuy === "hire";
 
   const hireSuppliers = [
@@ -449,18 +360,33 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
 
   // Resolve each answer back to its full option, so the sheet shows proper
   // labels ("Self-tie bow tie", not "self-tie") and the retailer link the
-  // groom saw when he chose it.
+  // groom saw when he chose it. Any chosen option with an illustration gets
+  // a visual card; everything else gets a text row. Question order preserved.
+  const ROW_LABELS: Record<string, string> = {
+    style: "Style", hireBuy: "Hire or buy", colour: "Colour", lapel: "Lapel",
+    buttonStance: "Button stance", waistcoat: "Waistcoat", waistOrCummerbund: "Waist covering",
+    tuxShirtCollar: "Shirt collar", tuxShirtFront: "Shirt front", tuxNeckwear: "Neckwear",
+    tieKnot: "Tie knot", tuxCuffs: "Cuffs", trousers: "Trousers", shoes: "Shoes",
+    groomsmen: "Groomsmen", finishing: "Finishing", pocketSquareFold: "Pocket square",
+  };
   const askedQuestions = buildQuestions(answers);
   const optionFor = (key: string) => {
     const q = askedQuestions.find(qq => qq.key === key);
     return q?.options.find(o => (o.id || o.label) === answers[key]);
   };
-  const visualCardKeys: Record<string, string> = {
-    "Lapel": "lapel",
-    "Button stance": "buttonStance",
-    "Shoes": "shoes",
-    "Pocket square": "pocketSquareFold",
-  };
+  const answeredKeys = askedQuestions.map(q => q.key).filter(k => answers[k]);
+  const visualCards = answeredKeys
+    .map(k => ({ key: k, opt: optionFor(k) }))
+    .filter(x => x.opt?.img)
+    .map(x => ({
+      label: ROW_LABELS[x.key] || x.key,
+      value: x.opt!.label,
+      img: x.opt!.img!,
+      aff: x.opt!.aff || (x.key === "shoes" ? shoeLink : undefined),
+    }));
+  const detailRows = answeredKeys
+    .filter(k => !optionFor(k)?.img)
+    .map(k => ({ key: k, label: ROW_LABELS[k] || k }));
 
   return (
     <div style={{ maxWidth: 760 }}>
@@ -501,28 +427,25 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
         </div>
 
         {visualCards.length > 0 && (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12, marginBottom: 32, maxWidth: 480 }}>
-            {visualCards.map((card, i) => {
-              const cardAff = (card.label === "Shoes" ? shoeLink : undefined) || optionFor(visualCardKeys[card.label] || "")?.aff;
-              return (
-                <div key={i} style={{ background: "#FFFFFF", border: "1px solid " + T.rule, borderRadius: 8, overflow: "hidden", display: "flex", flexDirection: "column" }}>
-                  <div style={{ background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 16px 12px" }}>
-                    <img
-                      src={card.img}
-                      alt={card.value}
-                      style={{ height: 140, width: "100%", objectFit: "contain", display: "block" }}
-                    />
-                  </div>
-                  <div style={{ padding: "0 16px 14px", textAlign: "center" }}>
-                    <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid, marginBottom: 2 }}>
-                      {card.label}
-                    </div>
-                    <div style={{ fontSize: 14, fontWeight: 500, color: T.ink, marginBottom: cardAff ? 8 : 0 }}>{card.value}</div>
-                    {cardAff && <AffLink label={cardAff.label} url={cardAff.url} />}
-                  </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 12, marginBottom: 32 }}>
+            {visualCards.map((card, i) => (
+              <div key={i} style={{ background: "#FFFFFF", border: "1px solid " + T.rule, borderRadius: 8, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+                <div style={{ background: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", padding: "18px 14px 10px" }}>
+                  <img
+                    src={card.img}
+                    alt={card.value}
+                    style={{ height: 110, width: "100%", objectFit: "contain", display: "block" }}
+                  />
                 </div>
-              );
-            })}
+                <div style={{ padding: "0 14px 14px", textAlign: "center", marginTop: "auto" }}>
+                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid, marginBottom: 2 }}>
+                    {card.label}
+                  </div>
+                  <div style={{ fontSize: 13, fontWeight: 500, color: T.ink, marginBottom: card.aff ? 8 : 0 }}>{card.value}</div>
+                  {card.aff && <AffLink label={card.aff.label} url={card.aff.url} />}
+                </div>
+              </div>
+            ))}
           </div>
         )}
 
@@ -597,7 +520,6 @@ export function AttireModule() {
 
   if (phase === "intro") return (
     <IntroScreen
-      eyebrow="Attire · The field guide"
       title="The decisions you didn't know you'd have to make."
       description="Lapels, cuffs, knots, pockets — every choice your fitting will throw at you, explained before you're stood at the counter. Pick as you go, or just look. Undecided is fine."
       steps={["Style", "Hire or buy", "Lapel", "Colour", "Details", "Shoes"]}

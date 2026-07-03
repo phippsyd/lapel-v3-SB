@@ -125,7 +125,7 @@ export function RingsModule() {
   const [answers, setAnswers] = useState<Answers>({});
 
   if (phase === "intro") return (
-    <IntroScreen eyebrow="Rings · Decision guide" title="Every ring option a groom has."
+    <IntroScreen title="Every ring option a groom has."
       description="Platinum to rubber to a ring tattoo — the complete picture, not a curated shortlist."
       steps={["Match or contrast", "Material", "Width", "Finish", "Budget", "Engraving"]}
       quote="I went into three jewellers and none of them mentioned silicone, titanium, or tungsten. I only found out about them online. This is what I wish I had read first."

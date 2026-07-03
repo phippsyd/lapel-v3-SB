@@ -108,8 +108,8 @@ export function Progress({ step, total, onBack }: { step: number; total: number;
   );
 }
 
-export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAuthor, onStart, illustration, secondaryLabel, onSecondary, ctaLabel, plates }: {
-  eyebrow: string;
+export function IntroScreen({ title, description, steps, quote, quoteAuthor, onStart, illustration, secondaryLabel, onSecondary, ctaLabel, plates }: {
+  eyebrow?: string;
   title: string;
   description: string;
   steps?: string[];
@@ -126,10 +126,6 @@ export function IntroScreen({ eyebrow, title, description, steps, quote, quoteAu
 
   const textColumn = (
     <div style={{ maxWidth: 560 }}>
-      <div style={{ display: "flex", gap: 6, alignItems: "center", marginBottom: 12 }}>
-        <div style={{ width: 20, height: 1.5, background: T.mid, borderRadius: 1 }} />
-        <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: T.mid }}>{eyebrow}</div>
-      </div>
       <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 42, color: T.ink, lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.01em" }}>{title}</h2>
       <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.7, marginBottom: steps ? 18 : 28, maxWidth: 480 }}>{description}</p>
 

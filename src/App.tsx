@@ -5,7 +5,7 @@ import { usePersistentState } from "./persistence";
 import { AttireModule } from "./modules/Attire";
 import { RingsModule } from "./modules/Rings";
 import { DressCodesModule } from "./modules/DressCodes";
-import { StagModule } from "./modules/Stag";
+import { StagModule, DESTINATION_PHOTOS } from "./modules/Stag";
 import { SpeechModule } from "./modules/Speech";
 import { FAQModule } from "./modules/FAQ";
 import { ProfileModule } from "./modules/Profile";
@@ -222,21 +222,51 @@ export default function Lapel() {
         <div>
           {/* Hero */}
           <div style={{ background: T.navy, padding: "28px 32px 56px" }}>
-            <div style={{ maxWidth: 960, margin: "0 auto", width: "100%" }}>
-              <div style={{ maxWidth: 720 }}>
-                <h1 className="hero-title" style={{ fontFamily: "'DM Serif Display', serif", fontSize: 54, color: "white", lineHeight: 1.06, marginBottom: 18, letterSpacing: "-0.02em", textAlign: "left" }}>
-                  {displayProfile.groomName
-                    ? <>Every decision you actually<br />have to make, {displayProfile.groomName}.</>
-                    : <>Every decision a groom<br />actually has to make.</>
-                  }
-                </h1>
-                <div style={{ height: 1, background: "rgba(255,255,255,0.12)", marginBottom: 18 }} />
-                <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.75, maxWidth: 520, margin: 0, textAlign: "left" }}>
-                  Attire, rings, stag, speech — covered properly. No fluff.
-                  {daysLeft !== null && daysLeft > 0 && (
-                    <> {displayProfile.venue ? displayProfile.venue : "The big day"} is in <strong style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>{daysLeft.toLocaleString()} days</strong>.</>
-                  )}
-                </p>
+            <div style={{ maxWidth: 1080, margin: "0 auto", width: "100%" }}>
+              <div className="intro-spread">
+                <div style={{ maxWidth: 560 }}>
+                  <h1 className="hero-title" style={{ fontFamily: "'DM Serif Display', serif", fontSize: 54, color: "white", lineHeight: 1.06, marginBottom: 18, letterSpacing: "-0.02em", textAlign: "left" }}>
+                    {displayProfile.groomName
+                      ? <>Every decision you actually<br />have to make, {displayProfile.groomName}.</>
+                      : <>Every decision a groom<br />actually has to make.</>
+                    }
+                  </h1>
+                  <div style={{ height: 1, background: "rgba(255,255,255,0.12)", marginBottom: 18 }} />
+                  <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", lineHeight: 1.75, maxWidth: 520, margin: 0, textAlign: "left" }}>
+                    Attire, rings, stag, speech — covered properly. No fluff.
+                    {daysLeft !== null && daysLeft > 0 && (
+                      <> {displayProfile.venue ? displayProfile.venue : "The big day"} is in <strong style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>{daysLeft.toLocaleString()} days</strong>.</>
+                    )}
+                  </p>
+                </div>
+                <div className="intro-plates" style={{ position: "relative", height: 340, minWidth: 0 }}>
+                  {[
+                    { img: "https://images.unsplash.com/photo-1532207733185-fc73ca0a54b5?q=80&w=900&auto=format&fit=crop", caption: "The attire", credit: { name: "Hermes Rivera", url: "https://unsplash.com/@hermez777" } },
+                    { img: DESTINATION_PHOTOS["budapest"]?.imageUrl || "", caption: "The stag", credit: DESTINATION_PHOTOS["budapest"] && { name: DESTINATION_PHOTOS["budapest"].photographer, url: DESTINATION_PHOTOS["budapest"].photographerUrl } },
+                  ].filter(p => p.img).map((p, i) => (
+                    <div key={i} style={{
+                      position: "absolute",
+                      ...(i === 0
+                        ? { top: 0, right: 12, width: "54%", transform: "rotate(1.5deg)", zIndex: 1 }
+                        : { bottom: 0, left: 6, width: "46%", transform: "rotate(-2deg)", zIndex: 2 }),
+                      background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.25)", padding: "10px 10px 8px",
+                      boxShadow: "0 10px 32px rgba(0,0,0,0.28)",
+                    }}>
+                      <div style={{ width: "100%", aspectRatio: "4 / 5", overflow: "hidden", background: "#EDEAE6", position: "relative" }}>
+                        <img src={p.img} alt={p.caption} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                        {p.credit && p.credit.name && (
+                          <a href={p.credit.url} target="_blank" rel="noopener noreferrer"
+                            style={{ position: "absolute", bottom: 5, left: 7, fontSize: 9, color: "rgba(255,255,255,0.85)", textShadow: "0 1px 3px rgba(0,0,0,0.6)", textDecoration: "none", fontFamily: "Inter, sans-serif" }}>
+                            Photo: {p.credit.name}
+                          </a>
+                        )}
+                      </div>
+                      <div style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: "#6B6863", textAlign: "center", marginTop: 8 }}>
+                        {p.caption}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
