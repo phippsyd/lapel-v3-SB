@@ -126,7 +126,7 @@ export function IntroScreen({ title, description, steps, quote, quoteAuthor, onS
 
   const textColumn = (
     <div style={{ maxWidth: 560 }}>
-      <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 42, color: T.ink, lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.01em" }}>{title}</h2>
+      <h2 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: 42, color: T.ink, lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.01em" }}>{title}</h2>
       <p style={{ fontSize: 15, color: T.mid, lineHeight: 1.7, marginBottom: steps ? 18 : 28, maxWidth: 480 }}>{description}</p>
 
       {steps && (
@@ -355,7 +355,7 @@ export function Journey({ questions, onComplete, onAnswerChange, skippable }: { 
   return (
     <div>
       <Progress step={step + 1} total={questions.length} onBack={step > 0 ? () => setStep(step - 1) : null} />
-      <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 34, color: T.ink, marginBottom: 6, letterSpacing: "-0.01em" }}>{q.question}</h2>
+      <h2 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: 34, color: T.ink, marginBottom: 6, letterSpacing: "-0.01em" }}>{q.question}</h2>
       {q.sub && <p style={{ fontSize: 14, color: T.mid, marginBottom: q.education ? 18 : 28, lineHeight: 1.65 }}>{q.sub}</p>}
       {q.education && <GoodToKnow>{q.education}</GoodToKnow>}
       {isPortraitQuestion ? (
