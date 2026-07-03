@@ -482,7 +482,7 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
         )}
         <button onClick={onRestart}
           style={{ background: "none", border: "1px solid " + T.rule, color: T.mid, padding: "12px 20px", fontSize: 12, fontWeight: 600, cursor: "pointer", borderRadius: 2 }}>
-          Start over
+          {saved ? "Retake the guide" : "Start over"}
         </button>
       </div>
     </div>
@@ -508,13 +508,16 @@ const INTRO_PLATES = [
 ];
 
 export function AttireModule() {
-  const [phase, setPhase] = useState<"intro" | "journey" | "result">("intro");
-  const [answers, setAnswers] = useState<Answers>({});
-  const [saved, setSaved] = useState(false);
-  const [, setSavedAttire] = usePersistentState<Answers>("attire-answers", {});
+  const [savedAttire, setSavedAttire] = usePersistentState<Answers>("attire-answers", {});
+  const hasSaved = Object.keys(savedAttire).length > 0;
+  // A groom with a saved fitting sheet lands on his sheet, not the intro.
+  const [phase, setPhase] = useState<"intro" | "journey" | "result">(hasSaved ? "result" : "intro");
+  const [answers, setAnswers] = useState<Answers>(savedAttire);
+  const [saved, setSaved] = useState(hasSaved);
 
   const handleComplete = (a: Answers) => {
     setAnswers(a);
+    setSaved(false);
     setPhase("result");
   };
 
@@ -546,7 +549,7 @@ export function AttireModule() {
       answers={answers}
       saved={saved}
       onSave={() => { setSavedAttire(answers); setSaved(true); }}
-      onRestart={() => { setPhase("intro"); setAnswers({}); setSaved(false); }}
+      onRestart={() => { setAnswers({}); setSaved(false); setPhase("journey"); }}
     />
   );
 }
