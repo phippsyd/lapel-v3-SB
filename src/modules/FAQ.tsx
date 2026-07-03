@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { T } from "../theme";
 import { AffLink } from "../shared";
 
@@ -109,6 +109,27 @@ const FAQ_DATA: FAQCategory[] = [
 ];
 
 export function FAQModule() {
+  // FAQPage structured data, generated from the real content above so it
+  // never drifts. Helps search engines understand the page; rich-result
+  // display is at Google's discretion.
+  useEffect(() => {
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": FAQ_DATA.flatMap(c => c.questions).map(q => ({
+        "@type": "Question",
+        "name": q.q,
+        "acceptedAnswer": { "@type": "Answer", "text": q.a },
+      })),
+    };
+    const s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.id = "faq-jsonld";
+    s.textContent = JSON.stringify(data);
+    document.head.appendChild(s);
+    return () => { document.getElementById("faq-jsonld")?.remove(); };
+  }, []);
+
   const [activeCategory, setActiveCategory] = useState(FAQ_DATA[0].category);
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
   const activeData = FAQ_DATA.find(c => c.category === activeCategory)!;
