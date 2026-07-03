@@ -189,7 +189,7 @@ export function IntroScreen({ title, description, steps, quote, quoteAuthor, onS
               )}
             </div>
             <div style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.16em", textTransform: "uppercase", color: T.mid, textAlign: "center", marginTop: 9 }}>
-              {["Plate I", "Plate II"][i]} &mdash; {p.caption}
+              {p.caption}
             </div>
           </div>
         ))}
