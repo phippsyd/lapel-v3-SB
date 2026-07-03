@@ -457,10 +457,6 @@ export function DressCodesModule() {
 
   return (
     <div>
-      <div style={{ display: "flex", gap: 6, alignItems: "center", marginBottom: 12 }}>
-        <div style={{ width: 20, height: 1.5, background: T.mid, borderRadius: 1 }} />
-        <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: T.mid }}>Dress codes · Reference</div>
-      </div>
       <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 42, color: T.ink, lineHeight: 1.08, marginBottom: 14, letterSpacing: "-0.01em" }}>Dress codes, decoded.</div>
       <div style={{ fontSize: 15, color: T.mid, lineHeight: 1.7, maxWidth: 560, marginBottom: 32 }}>
         Every code a UK invitation can throw at you. When in doubt, dress slightly above — you can always remove a tie, but you cannot undo underdressing.

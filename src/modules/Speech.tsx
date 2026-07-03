@@ -35,10 +35,6 @@ export function SpeechModule() {
 
   if (!mode) return (
     <div>
-      <div style={{ display: "flex", gap: 6, alignItems: "center", marginBottom: 12 }}>
-        <div style={{ width: 20, height: 1.5, background: T.mid, borderRadius: 1 }} />
-        <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: T.mid }}>Speech · Builder</div>
-      </div>
       <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 42, color: T.ink, lineHeight: 1.08, marginBottom: 14, maxWidth: 500, letterSpacing: "-0.01em" }}>Your groom speech.</div>
       <div style={{ fontSize: 15, color: T.mid, lineHeight: 1.7, maxWidth: 520, marginBottom: 28 }}>Learn how to approach it, or sit down and write it now.</div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>

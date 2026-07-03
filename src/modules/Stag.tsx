@@ -245,7 +245,7 @@ const ALL_DESTINATIONS: Destination[] = [
 
 const GENERIC_FALLBACK_PHOTO = { imageUrl: "https://images.unsplash.com/photo-1563177978-4c5ffc081b2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Reiseuhu", photographerUrl: "https://unsplash.com/@reiseuhu" };
 
-const DESTINATION_PHOTOS: Record<string, { imageUrl: string; photographer: string; photographerUrl: string }> = {
+export const DESTINATION_PHOTOS: Record<string, { imageUrl: string; photographer: string; photographerUrl: string }> = {
   krakow: { imageUrl: "https://images.unsplash.com/photo-1563177978-4c5ffc081b2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxLcmFrb3clMjBQb2xhbmQlMjBjaXR5c2NhcGV8ZW58MHwwfHx8MTc4MjgzMTE1MXww&ixlib=rb-4.1.0&q=80&w=1080", photographer: "Reiseuhu", photographerUrl: "https://unsplash.com/@reiseuhu" },
   budapest: { imageUrl: "https://images.unsplash.com/photo-1553355202-f869c36581ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxCdWRhcGVzdCUyMEh1bmdhcnklMjBjaXR5c2NhcGV8ZW58MHwwfHx8MTc4MjgzMTE1NHww&ixlib=rb-4.1.0&q=80&w=1080", photographer: "Philipp Trubchenko", photographerUrl: "https://unsplash.com/@seresigo" },
   prague: { imageUrl: "https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyMzJ8MHwxfHNlYXJjaHwxfHxQcmFndWUlMjBDemVjaCUyMFJlcHVibGljJTIwY2l0eXNjYXBlfGVufDB8MHx8fDE3ODI4MzExNTZ8MA&ixlib=rb-4.1.0&q=80&w=1080", photographer: "Ouael Ben Salah", photographerUrl: "https://unsplash.com/@benwksi" },
@@ -833,7 +833,6 @@ export function StagModule({ groomName }: { groomName?: string }) {
 
   if (phase === "intro") return (
     <IntroScreen
-      eyebrow="Stag · Planning guide"
       title="Find the right stag for your group."
       description="Skiing in Whistler, a night in Belgrade, a house in the Lakes — every type of stag and nearly 200 destinations, filtered to your group."
       steps={["Type", "His vibe", "Region", "Group size", "Budget", "Destination", "Transport"]}
