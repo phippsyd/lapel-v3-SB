@@ -241,7 +241,7 @@ export default function Lapel() {
                 </div>
                 <div className="intro-plates" style={{ position: "relative", height: 340, minWidth: 0 }}>
                   {[
-                    { img: "https://images.unsplash.com/photo-1532207733185-fc73ca0a54b5?q=80&w=900&auto=format&fit=crop", caption: "The attire", credit: { name: "Hermes Rivera", url: "https://unsplash.com/@hermez777" } },
+                    { img: "https://images.unsplash.com/photo-1506072590044-75de1b7b7806?q=80&w=900&auto=format&fit=crop", caption: "The attire", credit: { name: "Soroush Karimi", url: "https://unsplash.com/@soroushkarimi" } },
                     { img: DESTINATION_PHOTOS["budapest"]?.imageUrl || "", caption: "The stag", credit: DESTINATION_PHOTOS["budapest"] && { name: DESTINATION_PHOTOS["budapest"].photographer, url: DESTINATION_PHOTOS["budapest"].photographerUrl } },
                   ].filter(p => p.img).map((p, i) => (
                     <div key={i} style={{

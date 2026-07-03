@@ -116,8 +116,16 @@ export const ringsAuditGroups = questions.map(q => ({ section: "Rings — " + q.
 // Paste your chosen Unsplash images here (images.unsplash.com URL, caption,
 // photographer name + profile URL). Renders single-column until filled.
 const RINGS_INTRO_PLATES = [
-  { img: "", caption: "Brushed platinum", credit: { name: "", url: "" } },
-  { img: "", caption: "The alternatives", credit: { name: "", url: "" } },
+  {
+    img: "https://images.unsplash.com/photo-1627293509201-cd0c780043e6?q=80&w=900&auto=format&fit=crop",
+    caption: "Hers and his",
+    credit: { name: "Alexis Antoine", url: "https://unsplash.com/@alexisantoine" },
+  },
+  {
+    img: "https://images.unsplash.com/photo-1620968867360-5cda83d2bffd?q=80&w=900&auto=format&fit=crop",
+    caption: "The metal",
+    credit: { name: "Rodri Caruso", url: "https://unsplash.com/@rodricaruso" },
+  },
 ];
 
 export function RingsModule() {
