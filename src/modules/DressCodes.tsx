@@ -368,8 +368,8 @@ function DressCodeCard({ dc, isOpen, onToggle }: { dc: DressCode; isOpen: boolea
       onClick={onToggle}
     >
       {/* Image */}
-      <div style={{ height: 250, position: "relative", overflow: "hidden", borderBottom: "1px solid " + T.rule }}>
-        <img src={DRESS_CODE_PHOTOS[dc.id] || DRESS_CODE_FALLBACK_PHOTO} alt={dc.label} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%", display: "block" }} />
+      <div style={{ aspectRatio: "4 / 5", position: "relative", overflow: "hidden", borderBottom: "1px solid " + T.rule }}>
+        <img src={DRESS_CODE_PHOTOS[dc.id] || DRESS_CODE_FALLBACK_PHOTO} alt={dc.label} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
       </div>
 
       {/* Card header */}
@@ -453,6 +453,7 @@ export function DressCodesModule() {
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
         gap: 16,
+        alignItems: "start",
       }}
         className="dresscode-grid"
       >
