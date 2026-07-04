@@ -25,6 +25,7 @@ export type Question = {
   question: string;
   sub?: string;
   education?: string;
+  img?: string; // optional hero image shown between the header and the options
   options: Option[];
   groomsSay?: Quote[];
 };
@@ -358,6 +359,11 @@ export function Journey({ questions, onComplete, onAnswerChange, skippable }: { 
       <h2 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: 34, color: T.ink, marginBottom: 6, letterSpacing: "-0.01em" }}>{q.question}</h2>
       {q.sub && <p style={{ fontSize: 14, color: T.mid, marginBottom: q.education ? 18 : 28, lineHeight: 1.65 }}>{q.sub}</p>}
       {q.education && <GoodToKnow>{q.education}</GoodToKnow>}
+      {q.img && (
+        <div style={{ background: "#FFFFFF", border: "1px solid " + T.rule, borderRadius: 8, padding: 12, maxWidth: 460, marginBottom: 24 }}>
+          <img src={q.img} alt={q.question} loading="lazy" style={{ width: "100%", display: "block", borderRadius: 4 }} />
+        </div>
+      )}
       {isPortraitQuestion ? (
         <div className="options-grid">
           {q.options.map((opt, i) => <OptionCard key={i} opt={opt} isChosen={chosen === (opt.id || opt.label)} onChoose={() => choose(opt.id || opt.label)} portrait={!!(opt.img || opt.illus)} />)}
