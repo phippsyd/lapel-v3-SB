@@ -26,8 +26,8 @@ const baseQuestions: Question[] = [
     key: "style", question: "Suit or tuxedo?", sub: "The first decision. Everything else follows from here.",
     education: "A suit works for almost any UK venue. A tuxedo is best for formal evening receptions or black tie venues. The majority of UK grooms choose a suit.",
     options: [
-      { id: "suit", label: "Suit", tag: "Most popular", desc: "Versatile and modern. Works for country houses, barns, city hotels. Easier to hire or buy at any budget.", aff: { label: "Browse suits at Moss Bros", url: "https://www.mossbros.co.uk/mens-wedding-suits" } },
-      { id: "tux", label: "Tuxedo", tag: "Classic choice", desc: "Formal and timeless. Best for black tie venues or if you want to feel genuinely elevated.", aff: { label: "Browse tuxedos at Reiss", url: "https://www.reiss.com/mens/suits/suits-blazers" } },
+      { id: "suit", label: "Suit", tag: "Most popular", desc: "Versatile and modern. Works for country houses, barns, city hotels. Easier to hire or buy at any budget.", img: "/images/DRESSCODES/dc-lounge-suit.jpg", aff: { label: "Browse suits at Moss Bros", url: "https://www.mossbros.co.uk/mens-wedding-suits" } },
+      { id: "tux", label: "Tuxedo", tag: "Classic choice", desc: "Formal and timeless. Best for black tie venues or if you want to feel genuinely elevated.", img: "/images/DRESSCODES/dc-black-tie.jpg", aff: { label: "Browse tuxedos at Reiss", url: "https://www.reiss.com/mens/suits/suits-blazers" } },
     ],
     groomsSay: [
       { quote: "Our venue was a Georgian manor. Suit felt right — a tux would have looked overdressed.", author: "u/groomadvice_uk" },
