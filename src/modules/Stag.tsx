@@ -872,7 +872,7 @@ export function StagModule({ groomName }: { groomName?: string }) {
         {currentQ.options.some((opt: Option) => opt.img) ? (
           <div className="options-grid-photo">
             {currentQ.options.map((opt: Option, i: number) => (
-              <OptionCard key={i} opt={opt} isChosen={chosen === (opt.id || opt.label)} onChoose={() => choose(opt.id || opt.label)} portrait />
+              <OptionCard key={i} opt={opt} isChosen={chosen === (opt.id || opt.label)} onChoose={() => choose(opt.id || opt.label)} portrait landscape />
             ))}
           </div>
         ) : (

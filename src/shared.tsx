@@ -17,6 +17,7 @@ export type Option = {
   cons?: string[];
   illus?: ((inv: boolean) => ReactNode) | ReactNode;
   img?: string;
+  swatch?: string; // hex colour for colour-picker questions
   photoCredit?: { name: string; url: string };
   aff?: AffLinkData;
 };
@@ -199,9 +200,37 @@ export function IntroScreen({ title, description, steps, quote, quoteAuthor, onS
   );
 }
 
-export function OptionCard({ opt, isChosen, onChoose, portrait }: { opt: Option; isChosen: boolean; onChoose: () => void; portrait?: boolean }) {
+export function OptionCard({ opt, isChosen, onChoose, portrait, landscape }: { opt: Option; isChosen: boolean; onChoose: () => void; portrait?: boolean; landscape?: boolean }) {
   const [hovered, setHovered] = useState(false);
   const hasVisual = !!(opt.img || opt.illus);
+
+  // Colour swatch card — a large colour block, label and description below
+  if (opt.swatch) {
+    const isLight = opt.swatch === "#C8C4BB";
+    const textOnSwatch = isLight ? "#1B2C33" : "rgba(255,255,255,0.92)";
+    return (
+      <button onClick={onChoose}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          background: "none", border: `2px solid ${isChosen ? T.navy : hovered ? "#B5B1AC" : T.rule}`,
+          borderRadius: 8, padding: 0, cursor: "pointer", overflow: "hidden",
+          transition: "border-color 0.15s, box-shadow 0.15s",
+          boxShadow: isChosen ? "0 4px 20px rgba(27,44,51,0.22)" : hovered ? "0 2px 12px rgba(0,0,0,0.07)" : "none",
+          display: "flex", flexDirection: "column", width: "100%", textAlign: "left", fontFamily: "Inter, sans-serif",
+        }}>
+        <div style={{ background: opt.swatch, aspectRatio: "3 / 2", width: "100%", position: "relative", display: "flex", alignItems: "flex-end", padding: "12px 14px", boxSizing: "border-box" }}>
+          {opt.tag && <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: textOnSwatch, opacity: 0.8 }}>{opt.tag}</div>}
+          <div style={{ position: "absolute", top: 10, right: 10, width: 22, height: 22, borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color: T.navy, opacity: isChosen ? 1 : 0, transform: isChosen ? "scale(1)" : "scale(0.5)", transition: "opacity 0.15s, transform 0.15s" }}>&#10003;</div>
+        </div>
+        <div style={{ padding: "12px 14px 14px", background: isChosen ? T.navy : hovered ? "#D6D2CC" : T.white, transition: "background 0.15s", flex: 1 }}>
+          <div style={{ fontSize: 14, fontWeight: 600, color: isChosen ? "white" : T.ink, marginBottom: opt.desc ? 4 : 0 }}>{opt.label}</div>
+          {opt.desc && <div style={{ fontSize: 12, color: isChosen ? "rgba(255,255,255,0.7)" : T.mid, lineHeight: 1.55 }}>{opt.desc}</div>}
+          {opt.aff && <div style={{ marginTop: 8 }}><AffLink label={opt.aff.label} url={opt.aff.url} light={isChosen} /></div>}
+        </div>
+      </button>
+    );
+  }
 
   if (portrait && hasVisual) {
     return (
@@ -215,7 +244,7 @@ export function OptionCard({ opt, isChosen, onChoose, portrait }: { opt: Option;
           boxShadow: isChosen ? "0 4px 20px rgba(85,83,65,0.16)" : hovered ? "0 2px 12px rgba(0,0,0,0.06)" : "none",
           display: "flex", flexDirection: "column", width: "100%", textAlign: "left", fontFamily: "Inter, sans-serif",
         }}>
-        <div style={{ width: "100%", ...(opt.img ? { aspectRatio: "4 / 5" } : { height: 220 }), background: "#FFFFFF", position: "relative", flexShrink: 0, overflow: "hidden" }}>
+        <div style={{ width: "100%", ...(landscape ? { height: 200 } : opt.img ? { aspectRatio: "4 / 5" } : { height: 220 }), background: "#FFFFFF", position: "relative", flexShrink: 0, overflow: "hidden" }}>
           {opt.img && <img src={opt.img} alt={opt.label} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />}
           {opt.img && opt.photoCredit && (
             <a href={opt.photoCredit.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
@@ -352,7 +381,7 @@ export function Journey({ questions, onComplete, onAnswerChange, skippable }: { 
     if (safeStep + 1 < questions.length) setStep(safeStep + 1);
     else onComplete(answers);
   };
-  const isPortraitQuestion = q.options.some(opt => opt.img || opt.illus);
+  const isPortraitQuestion = q.options.some(opt => opt.img || opt.illus || opt.swatch);
   return (
     <div>
       <Progress step={step + 1} total={questions.length} onBack={step > 0 ? () => setStep(step - 1) : null} />
