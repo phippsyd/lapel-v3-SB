@@ -16,19 +16,20 @@ type DressCode = {
   photoCredit?: { name: string; url: string };
 };
 
-const DRESS_CODE_PHOTOS: Record<string, { imageUrl: string; photographer: string; photographerUrl: string }> = {
-  "white-tie": { imageUrl: "https://images.unsplash.com/photo-1518049737507-55dc3314b311?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Marcus Lewis", photographerUrl: "https://unsplash.com/@marcusvlewis" },
-  "black-tie": { imageUrl: "https://images.unsplash.com/photo-1694394181749-50dcca5463d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Jennifer Kalenberg", photographerUrl: "https://unsplash.com/@jkalen71" },
-  "black-tie-optional": { imageUrl: "https://images.unsplash.com/photo-1612325430161-94c758c7f330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "zero take", photographerUrl: "https://unsplash.com/@zerotake" },
-  "formal": { imageUrl: "https://images.unsplash.com/photo-1529635229076-82fefed713c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Samantha Gades", photographerUrl: "https://unsplash.com/@srosinger3997" },
-  "morning-dress": { imageUrl: "https://images.unsplash.com/photo-1664646327030-339b85a9bd43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Christophe Dusabe", photographerUrl: "https://unsplash.com/@bronzeshooter" },
-  "lounge-suit": { imageUrl: "https://images.unsplash.com/flagged/photo-1571582159131-b6fcd22646c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Miguel Teirlinck", photographerUrl: "https://unsplash.com/@miguelteirlinck" },
-  "cocktail-attire": { imageUrl: "https://images.unsplash.com/photo-1489370603040-dc6c28a1d37a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Alvin Mahmudov", photographerUrl: "https://unsplash.com/@alvinmahmudov" },
-  "smart-casual": { imageUrl: "https://images.unsplash.com/photo-1517938889432-a2ac9241a486?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "bruce mars", photographerUrl: "https://unsplash.com/@brucemars" },
-  "garden-party": { imageUrl: "https://images.unsplash.com/photo-1688573156632-4fe3c42e73c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Elijah Crouch", photographerUrl: "https://unsplash.com/@elijahbcrouch" },
-  "festive-winter": { imageUrl: "https://images.unsplash.com/photo-1523844051804-16488e54e099?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Heather Miller", photographerUrl: "https://unsplash.com/@heathamilla" },
-  "beach-destination": { imageUrl: "https://images.unsplash.com/photo-1725044542600-c6f40914519a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", photographer: "Javier González Fotógrafo", photographerUrl: "https://unsplash.com/@livingcolortj" },
-  "highland": { imageUrl: "https://images.unsplash.com/photo-1533220223327-8a56200c18bd?q=80&w=1080&auto=format&fit=crop", photographer: "Jon Tyson", photographerUrl: "https://unsplash.com/@jontyson" },
+// Owned photo set — generated for Lapel, no attribution required.
+const DRESS_CODE_PHOTOS: Record<string, string> = {
+  "white-tie": "/images/DRESSCODES/dc-white-tie.jpg",
+  "black-tie": "/images/DRESSCODES/dc-black-tie.jpg",
+  "black-tie-optional": "/images/DRESSCODES/dc-black-tie-optional.jpg",
+  "formal": "/images/DRESSCODES/dc-formal.jpg",
+  "morning-dress": "/images/DRESSCODES/dc-morning-dress.jpg",
+  "lounge-suit": "/images/DRESSCODES/dc-lounge-suit.jpg",
+  "cocktail-attire": "/images/DRESSCODES/dc-cocktail.jpg",
+  "smart-casual": "/images/DRESSCODES/dc-smart-casual.jpg",
+  "garden-party": "/images/DRESSCODES/dc-garden-party.jpg",
+  "festive-winter": "/images/DRESSCODES/dc-festive-winter.jpg",
+  "beach-destination": "/images/DRESSCODES/dc-beach.jpg",
+  "highland": "/images/DRESSCODES/dc-highland.jpg",
 };
 const DRESS_CODE_FALLBACK_PHOTO = DRESS_CODE_PHOTOS["formal"];
 
@@ -367,23 +368,9 @@ function DressCodeCard({ dc, isOpen, onToggle }: { dc: DressCode; isOpen: boolea
       onClick={onToggle}
     >
       {/* Image */}
-      {(() => {
-        const photo = DRESS_CODE_PHOTOS[dc.id] || DRESS_CODE_FALLBACK_PHOTO;
-        return (
-          <div style={{ height: 160, position: "relative", overflow: "hidden", borderBottom: "1px solid " + T.rule }}>
-            <img src={photo.imageUrl} alt={dc.label} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-            <a
-              href={photo.photographerUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={e => e.stopPropagation()}
-              style={{ position: "absolute", bottom: 6, left: 8, fontSize: 9, color: "rgba(255,255,255,0.85)", textShadow: "0 1px 3px rgba(0,0,0,0.6)", textDecoration: "none", fontFamily: "Inter, sans-serif" }}
-            >
-              Photo: {photo.photographer}
-            </a>
-          </div>
-        );
-      })()}
+      <div style={{ height: 250, position: "relative", overflow: "hidden", borderBottom: "1px solid " + T.rule }}>
+        <img src={DRESS_CODE_PHOTOS[dc.id] || DRESS_CODE_FALLBACK_PHOTO} alt={dc.label} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 15%", display: "block" }} />
+      </div>
 
       {/* Card header */}
       <div style={{ padding: "20px 20px 18px" }}>
