@@ -215,7 +215,7 @@ export function OptionCard({ opt, isChosen, onChoose, portrait }: { opt: Option;
           boxShadow: isChosen ? "0 4px 20px rgba(85,83,65,0.16)" : hovered ? "0 2px 12px rgba(0,0,0,0.06)" : "none",
           display: "flex", flexDirection: "column", width: "100%", textAlign: "left", fontFamily: "Inter, sans-serif",
         }}>
-        <div style={{ width: "100%", height: opt.img ? 280 : 220, background: "#FFFFFF", position: "relative", flexShrink: 0, overflow: "hidden" }}>
+        <div style={{ width: "100%", ...(opt.img ? { aspectRatio: "4 / 5" } : { height: 220 }), background: "#FFFFFF", position: "relative", flexShrink: 0, overflow: "hidden" }}>
           {opt.img && <img src={opt.img} alt={opt.label} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />}
           {opt.img && opt.photoCredit && (
             <a href={opt.photoCredit.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
