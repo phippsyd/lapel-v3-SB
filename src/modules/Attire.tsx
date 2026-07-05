@@ -205,7 +205,11 @@ const buttonStanceQuestion: Question = {
   ],
 };
 
-const waistcoatQuestion: Question = {
+function getWaistcoatQuestion(style: string): Question {
+  const noneImg = style === "tux"
+    ? "/images/WAISTCOATS/waistcoat-none-tux.jpg"
+    : "/images/WAISTCOATS/waistcoat-none.jpg";
+  return {
   key: "waistcoat", question: "Waistcoat?", sub: "Adds formality and completes the three-piece look.",
   education: "A waistcoat adds formality and covers the shirt waist — particularly useful if you are not wearing a cummerbund with a tux. The horseshoe cut is the most elegant option and flatters almost every build. A plain waistcoat often adds more to the look than most grooms expect.",
   options: [
@@ -214,13 +218,14 @@ const waistcoatQuestion: Question = {
     { id: "db-waistcoat", label: "Double-breasted waistcoat", tag: "Bold", desc: "Works with double-breasted jackets or as a contrast piece with single-breasted. A genuine statement.", img: "/images/WAISTCOATS/waistcoat-double-breasted.jpg" },
     { id: "horseshoe", label: "Horseshoe / low-cut", tag: "Most elegant", desc: "Deep U-shape showing more shirt and tie front. Very elegant and flattering. Works brilliantly with a self-tie bow tie on a tuxedo.", img: "/images/WAISTCOATS/waistcoat-horseshoe.jpg" },
     { id: "cummerbund", label: "Cummerbund", tag: "Black tie", desc: "A wide pleated sash worn around the waist instead of a waistcoat. Traditional black tie correct. Pleats must face upward.", img: "/images/WAISTCOATS/cummerbund.jpg", aff: { label: "Browse at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/black-tie" } },
-    { id: "none", label: "No waistcoat", tag: "Two-piece", desc: "Cleaner and more modern. Two-piece suits are entirely acceptable and many grooms prefer the less formal look." },
+    { id: "none", label: "No waistcoat", tag: "Two-piece", desc: "Cleaner and more modern. Two-piece suits are entirely acceptable and many grooms prefer the less formal look.", img: noneImg },
   ],
   groomsSay: [
     { quote: "Horseshoe waistcoat with the tux. The combination looked exceptional in photos.", author: "u/horseshoegroom" },
     { quote: "Skipped the waistcoat. Looked cleaner and more modern. No regrets.", author: "u/twopiecegroom" },
   ],
-};
+  };
+}
 
 const tieKnotQuestion: Question = {
   key: "tieKnot", question: "Which tie knot?", sub: "The knot changes the formality and proportion of the tie.",
@@ -267,34 +272,19 @@ const pocketSquareFoldQuestion: Question = {
   ],
 };
 
-const waistOrCummerbundQuestion: Question = {
-  key: "waistOrCummerbund", question: "Waistcoat or cummerbund?", sub: "Something needs to cover the trouser waistband. This is the choice.",
-  education: "The waistband of your trousers and the shirt tucked into them sit between the bottom of your jacket and the top of your trousers. Without a waistcoat or cummerbund, this gap is visible every time your jacket opens. Both options cover it — they just do so with a completely different look and formality level.",
-  options: [
-    { id: "waistcoat", label: "Waistcoat", tag: "Most popular", desc: "More contemporary than a cummerbund. Works for both suits and tuxedos. A five-button waistcoat is the most versatile choice. Leave the bottom button undone.", img: "/images/WAISTCOATS/waistcoat-5-button.jpg", pros: ["Works for suits and tuxedos", "More familiar and easier to wear", "Wide range of styles and cuts"], cons: ["Adds warmth — can get hot in summer"] },
-    { id: "cummerbund", label: "Cummerbund", tag: "Traditional black tie", desc: "A wide pleated sash worn around the waist. Traditional black tie correct. Less common now but genuinely elegant when worn properly. Pleats must face upward — this is non-negotiable.", img: "/images/WAISTCOATS/cummerbund.jpg", pros: ["Correct for formal black tie", "Lighter and cooler than a waistcoat", "Very elegant when done right"], cons: ["Pleats face upward — easy to put on incorrectly", "Less familiar to most grooms"], aff: { label: "Browse at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/black-tie" } },
-    { id: "neither", label: "Neither", desc: "A clean two-piece look with no waistcoat or cummerbund. Works for modern slim-cut tuxedos where the jacket sits close to the body. Only works if the jacket fits well enough that the waistband gap is never visible.", pros: ["Cleaner and more minimal", "Cooler in warm weather"], cons: ["The waistband gap will be visible if the jacket swings open", "Only works with a very well-fitted jacket"] },
-  ],
-  groomsSay: [
-    { quote: "Waistcoat every time. Never understood cummerbunds — looks like a fancy belt to me.", author: "u/waistcoatfan" },
-    { quote: "Wore a cummerbund. Got it exactly right — pleats up, fitted properly. Looked genuinely correct in a way most black tie does not.", author: "u/cummerbundcorrect" },
-    { quote: "Neither — just a slim two-piece tux. Clean and modern. Would do it again.", author: "u/minimaltux" },
-  ],
-};
 
 function buildQuestions(answers: Answers): Question[] {
   const style = answers.style as string;
   const qs: Question[] = [...baseQuestions];
   qs.push(getLapelQuestion(style));
   qs.push(buttonStanceQuestion);
-  qs.push(waistcoatQuestion);
+  qs.push(getWaistcoatQuestion(style));
   if (style === "tux") {
     qs.push(getTuxShirtCollarQuestion());
     qs.push(getTuxShirtFrontQuestion());
     qs.push(getTuxNeckwearQuestion());
     if (answers.tuxNeckwear === "long-tie") qs.push(tieKnotQuestion);
     qs.push(getTuxCuffsQuestion());
-    qs.push(waistOrCummerbundQuestion);
   }
   qs.push(colourQuestion);
   if (style !== "tux") qs.push(groomsmenQuestion);
@@ -311,8 +301,7 @@ export const attireAuditGroups = [
   { section: "Lapel — suit path", options: suitLapelOptions },
   { section: "Lapel — tux path", options: tuxLapelOptions },
   { section: "Button stance", options: buttonStanceQuestion.options },
-  { section: "Waistcoat", options: waistcoatQuestion.options },
-  { section: "Waist covering (tux)", options: waistOrCummerbundQuestion.options },
+  { section: "Waistcoat", options: getWaistcoatQuestion("suit").options },
   { section: "Shirt collar (tux)", options: getTuxShirtCollarQuestion().options },
   { section: "Shirt front (tux)", options: getTuxShirtFrontQuestion().options },
   { section: "Neckwear (tux)", options: getTuxNeckwearQuestion().options },
