@@ -9,16 +9,15 @@ import { usePersistentState } from "../persistence";
 // Mandarin: no lapel/collar
 
 const suitLapelOptions = [
-  { id: "notched", label: "Notched lapel", tag: "Standard", desc: "The V-shaped notch where the collar meets the lapel. Clean, versatile, and sharp. The default on most hire suits.", img: "/images/LAPEL_STYLES/lapel-notched.png" },
-  { id: "peaked", label: "Peak lapel", tag: "Stand out", desc: "The lapel points upward toward the shoulders. More assertive and formal. Sets you apart from groomsmen who will almost certainly be in notched.", img: "/images/LAPEL_STYLES/lapel-peak.png" },
-  { id: "shawl", label: "Shawl lapel", tag: "Tux classic", desc: "A smooth, rounded lapel with no notch or peak. Almost exclusively seen on tuxedos and dinner jackets. Elegant and unmistakably black tie.", img: "/images/LAPEL_STYLES/lapel-shawl.png" },
-  { id: "mandarin", label: "Mandarin / collarless", tag: "Modern", desc: "No lapel at all. A clean, collarless jacket. Works for contemporary minimalist weddings. Unusual enough to be genuinely distinctive.", img: "/images/LAPEL_STYLES/lapel-mandarin.png" },
+  { id: "notched", label: "Notched lapel", tag: "Standard", desc: "The V-shaped notch where the collar meets the lapel. Clean, versatile, and sharp. The default on most hire suits.", img: "/images/LAPEL_STYLES/lapel-notched.jpg" },
+  { id: "peaked", label: "Peak lapel", tag: "Stand out", desc: "The lapel points upward toward the shoulders. More assertive and formal. Sets you apart from groomsmen who will almost certainly be in notched.", img: "/images/LAPEL_STYLES/lapel-peak.jpg" },
+  { id: "mandarin", label: "Mandarin / collarless", tag: "Modern", desc: "No lapel at all. A clean, collarless jacket. Works for contemporary minimalist weddings. Unusual enough to be genuinely distinctive.", img: "/images/LAPEL_STYLES/lapel-mandarin.jpg" },
 ];
 
 const tuxLapelOptions = [
-  { id: "peaked", label: "Peak lapel", tag: "Most popular", desc: "The lapel points upward toward the shoulders. Works on both suits and tuxedos. The most versatile black tie lapel.", img: "/images/LAPEL_STYLES/lapel-peak.png" },
-  { id: "shawl", label: "Shawl lapel", tag: "Most formal", desc: "The classic black tie lapel. Smooth, rounded, no notch or peak. Timeless and unmistakably elegant. The correct choice for a traditional tuxedo.", img: "/images/LAPEL_STYLES/lapel-shawl.png" },
-  { id: "notched", label: "Notched lapel", desc: "Less traditional on a tuxedo but entirely acceptable on a modern dinner suit. More casual than peaked or shawl.", img: "/images/LAPEL_STYLES/lapel-notched.png" },
+  { id: "peaked", label: "Peak lapel", tag: "Most popular", desc: "The lapel points upward toward the shoulders. Works on both suits and tuxedos. The most versatile black tie lapel.", img: "/images/LAPEL_STYLES/lapel-peak-tux.jpg" },
+  { id: "shawl", label: "Shawl lapel", tag: "Most formal", desc: "The classic black tie lapel. Smooth, rounded, no notch or peak. Timeless and unmistakably elegant. The correct choice for a traditional tuxedo.", img: "/images/LAPEL_STYLES/lapel-shawl-tux.jpg" },
+  { id: "notched", label: "Notched lapel", desc: "Less traditional on a tuxedo but entirely acceptable on a modern dinner suit. More casual than peaked or shawl.", img: "/images/LAPEL_STYLES/lapel-notched-tux.jpg" },
 ];
 
 const baseQuestions: Question[] = [
@@ -52,9 +51,9 @@ const getTuxShirtCollarQuestion = (): Question => ({
   key: "tuxShirtCollar", question: "Which shirt collar?", sub: "The collar is the most visible shirt detail and determines which bow tie style works.",
   education: "Wing collar is the traditional black tie choice — the small folded points frame the bow tie perfectly. Turndown collar is more modern and relaxed. If you are unsure, wing collar with a bow tie is always correct for black tie.",
   options: [
-    { id: "wing", label: "Wing collar", tag: "Traditional", desc: "The classic black tie collar. Small folded points sit either side of the bow tie. Always correct for formal black tie. Ask for this specifically when hiring or buying a dress shirt.", img: "/images/SHIRT_COLLARS/collar-wing.png" },
-    { id: "turndown", label: "Turndown / regular collar", tag: "Modern", desc: "A standard shirt collar worn with a bow tie or long tie. More contemporary and relaxed. Works well for less formal black tie events.", img: "/images/SHIRT_COLLARS/collar-turndown.png" },
-    { id: "mandarin", label: "Mandarin collar", desc: "No collar at all. A very contemporary look. Works specifically with a shawl lapel tuxedo. Not traditional black tie but looks exceptional when done right.", img: "/images/SHIRT_COLLARS/collar-mandarin.png" },
+    { id: "wing", label: "Wing collar", tag: "Traditional", desc: "The classic black tie collar. Small folded points sit either side of the bow tie. Always correct for formal black tie. Ask for this specifically when hiring or buying a dress shirt.", img: "/images/SHIRT_COLLARS/collar-wing.jpg" },
+    { id: "turndown", label: "Turndown / regular collar", tag: "Modern", desc: "A standard shirt collar worn with a bow tie or long tie. More contemporary and relaxed. Works well for less formal black tie events.", img: "/images/SHIRT_COLLARS/collar-turndown.jpg" },
+    { id: "mandarin", label: "Mandarin collar", desc: "No collar at all. A very contemporary look. Works specifically with a shawl lapel tuxedo. Not traditional black tie but looks exceptional when done right.", img: "/images/SHIRT_COLLARS/collar-mandarin.jpg" },
   ],
   groomsSay: [
     { quote: "Wing collar all the way. It just looks right with a bow tie. Turndown always looks like you forgot to change your shirt.", author: "u/wingcollar" },
@@ -64,12 +63,13 @@ const getTuxShirtCollarQuestion = (): Question => ({
 
 const getTuxShirtFrontQuestion = (): Question => ({
   key: "tuxShirtFront", question: "Shirt front?", sub: "The front of the dress shirt — visible between the jacket lapels all day.",
-  education: "The shirt front is more visible than most grooms realise — it sits between the lapels throughout the ceremony and dinner. A pleated bib front is the traditional choice. Plain front is cleaner and more modern.",
+  education: "The shirt front is more visible than most grooms realise — it sits between the lapels throughout the ceremony and dinner. A pleated bib front is the traditional choice. Studs replace buttons for a formal finish, and are worn with eveningwear only — never with a business suit.",
   options: [
-    { id: "pleated", label: "Pleated bib front", tag: "Traditional", desc: "Vertical pleats on the chest panel. The classic formal dress shirt look. Correct for traditional black tie.", img: "/images/SHIRT_FRONTS/shirt-pleated-bib.png" },
-    { id: "plain", label: "Plain front", tag: "Modern", desc: "Completely smooth chest. Cleaner and more contemporary. Works well with a slim-cut dinner jacket.", img: "/images/SHIRT_FRONTS/shirt-plain-front.png" },
-    { id: "pique", label: "Pique bib front", desc: "Raised textured fabric on the chest panel. The most formal option — technically reserved for white tie but occasionally worn at black tie. Very striking.", img: "/images/SHIRT_FRONTS/shirt-pique-bib.png" },
-    { id: "covered-placket", label: "Covered placket", desc: "No visible buttons at all — the placket is hidden beneath a fabric panel. Very sleek and modern. Looks exceptional under a close-fitting jacket.", img: "/images/SHIRT_FRONTS/shirt-covered-placket.png" },
+    { id: "pleated", label: "Pleated bib front", tag: "Traditional", desc: "Vertical pleats on the chest panel. The classic formal dress shirt look. Correct for traditional black tie.", img: "/images/SHIRT_FRONTS/shirt-pleated-bib.jpg" },
+    { id: "studs", label: "Plain front with studs", tag: "Formal finish", desc: "A smooth front closed with black or mother-of-pearl dress studs instead of buttons. The understated, correct black tie detail. Studs are eveningwear only.", img: "/images/SHIRT_FRONTS/shirt-studs.jpg" },
+    { id: "plain", label: "Plain front with buttons", tag: "Modern", desc: "Completely smooth chest with a standard button front. Cleaner and more contemporary. Works well with a slim-cut dinner jacket.", img: "/images/SHIRT_FRONTS/shirt-plain-front.jpg" },
+    { id: "pique", label: "Pique bib front", desc: "Raised textured fabric on the chest panel. The most formal option — technically reserved for white tie but occasionally worn at black tie. Very striking.", img: "/images/SHIRT_FRONTS/shirt-pique-bib.jpg" },
+    { id: "covered-placket", label: "Covered placket", desc: "No visible buttons at all — the placket is hidden beneath a fabric panel. Very sleek and modern. Looks exceptional under a close-fitting jacket.", img: "/images/SHIRT_FRONTS/shirt-covered-placket.jpg" },
   ],
   groomsSay: [
     { quote: "Plain front. Looked clean and modern. Nobody missed the pleats.", author: "u/plainfront" },
@@ -81,9 +81,9 @@ const getTuxNeckwearQuestion = (): Question => ({
   key: "tuxNeckwear", question: "Bow tie or long tie?", sub: "The most personal detail of the whole look.",
   education: "A self-tie bow tie always looks better than pre-tied because the slight imperfection — the fact that it was tied by a human hand — is the whole point. Pre-tied looks too symmetrical and reads as artificial. A clip-on is always obvious and should be avoided. A long tie with a tuxedo is unconventional but some grooms pull it off — it works best with a turndown collar and a modern slim dinner jacket.",
   options: [
-    { id: "self-tie", label: "Self-tie bow tie", tag: "The right choice", desc: "Takes about 10 minutes to learn from a YouTube video. Looks infinitely better than pre-tied because the slight asymmetry signals it is real. Buy one in black silk or midnight blue to match the suit.", img: "/images/NECKWEAR/neckwear-bowtie-self-tie.png", aff: { label: "Browse at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/ties/bow-ties" } },
-    { id: "pre-tied", label: "Pre-tied bow tie", desc: "Easier but looks slightly too perfect. Most people cannot tell, but you will know. Fine if nerves on the day mean you cannot face tying one.", img: "/images/NECKWEAR/neckwear-bowtie-pre-tied.png", aff: { label: "Browse at Charles Tyrwhitt", url: "https://www.ctshirts.com/mens-accessories/bow-ties" } },
-    { id: "long-tie", label: "Long tie", desc: "Unconventional with a tuxedo but works with a turndown collar and modern dinner jacket. More relaxed energy. Not traditional black tie.", img: "/images/NECKWEAR/neckwear-half-windsor.png", aff: { label: "Browse silk ties at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/ties/silk-ties" } },
+    { id: "self-tie", label: "Self-tie bow tie", tag: "The right choice", desc: "Takes about 10 minutes to learn from a YouTube video. Looks infinitely better than pre-tied because the slight asymmetry signals it is real. Buy one in black silk or midnight blue to match the suit.", img: "/images/NECKWEAR/neckwear-bowtie-self-tie.jpg", aff: { label: "Browse at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/ties/bow-ties" } },
+    { id: "pre-tied", label: "Pre-tied bow tie", desc: "Easier but looks slightly too perfect. Most people cannot tell, but you will know. Fine if nerves on the day mean you cannot face tying one.", img: "/images/NECKWEAR/neckwear-bowtie-pre-tied.jpg", aff: { label: "Browse at Charles Tyrwhitt", url: "https://www.ctshirts.com/mens-accessories/bow-ties" } },
+    { id: "long-tie", label: "Long tie", desc: "Unconventional with a tuxedo but works with a turndown collar and modern dinner jacket. More relaxed energy. Not traditional black tie.", img: "/images/NECKWEAR/neckwear-half-windsor.jpg", aff: { label: "Browse silk ties at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/ties/silk-ties" } },
     { id: "open-collar", label: "Open collar", desc: "No neckwear at all. Works specifically with a mandarin collar shirt. Very contemporary. Not suitable for traditional black tie venues." },
   ],
   groomsSay: [
@@ -96,8 +96,8 @@ const getTuxCuffsQuestion = (): Question => ({
   key: "tuxCuffs", question: "Cuffs and cufflinks?", sub: "The detail that is visible every time you shake someone's hand.",
   education: "Double cuffs with cufflinks are the correct choice for black tie — they extend slightly beyond the jacket sleeve and give the whole look a finished quality. Single button cuffs are more casual. Cufflinks are an opportunity for something personal — a monogram, a meaningful date, or something that connects to your partner or wedding.",
   options: [
-    { id: "double", label: "Double cuffs with cufflinks", tag: "Correct for black tie", desc: "Fold-back cuffs fastened with cufflinks. The cuff sits slightly proud of the jacket sleeve. Looks significantly more finished than a button cuff. Ask specifically for double cuff dress shirts when hiring or buying.", img: "/images/CUFFS/cuff-double-cufflink.png", aff: { label: "Browse cufflinks at Cufflinks.com", url: "https://www.cufflinks.com" } },
-    { id: "single", label: "Single button cuffs", desc: "Standard shirt cuff with a single button. Easier but less formal. Fine for relaxed black tie — not correct for a formal evening venue.", img: "/images/CUFFS/cuff-single-button.png" },
+    { id: "double", label: "Double cuffs with cufflinks", tag: "Correct for black tie", desc: "Fold-back cuffs fastened with cufflinks. The cuff sits slightly proud of the jacket sleeve. Looks significantly more finished than a button cuff. Ask specifically for double cuff dress shirts when hiring or buying.", img: "/images/CUFFS/cuff-double-cufflink.jpg", aff: { label: "Browse cufflinks at Cufflinks.com", url: "https://www.cufflinks.com" } },
+    { id: "single", label: "Single button cuffs", desc: "Standard shirt cuff with a single button. Easier but less formal. Fine for relaxed black tie — not correct for a formal evening venue.", img: "/images/CUFFS/cuff-single-button.jpg" },
     { id: "personalised", label: "Novelty or personalised cufflinks", desc: "Monogrammed, engraved with a date, or something meaningful. A nice detail that guests notice up close. Often given as groomsmen gifts too.", aff: { label: "Personalised cufflinks at Not On The High Street", url: "https://www.notonthehighstreet.com/personalised-cufflinks" } },
   ],
   groomsSay: [
@@ -177,10 +177,10 @@ const shoesQuestion: Question = {
   key: "shoes", question: "What about shoes?", sub: "The most overlooked part of the outfit. They are in almost every photo.",
   education: "A decent pair of Oxford or Derby shoes makes a real difference. Do not leave this until the last minute.",
   options: [
-    { id: "oxford", label: "Oxford", tag: "Most formal", price: "£80-£250", desc: "Closed lacing, clean and sleek. The classic wedding shoe. Works for suits and tuxedos.", img: "/images/SHOES/shoe-oxford.png", aff: { label: "Shop Oxfords at Loake", url: "https://www.loake.co.uk/collections/oxford-shoes" } },
-    { id: "derby", label: "Derby", tag: "Versatile", price: "£70-£200", desc: "Open lacing, slightly less formal but entirely appropriate for a suit.", img: "/images/SHOES/shoe-derby.png", aff: { label: "Shop at Clarks", url: "https://www.clarks.co.uk/mens-shoes/smart-shoes" } },
-    { id: "patent", label: "Patent Oxford", tag: "Black tie correct", price: "£100-£300", desc: "High-shine lacquered leather. The correct choice for a tuxedo. Looks exceptional with black tie.", img: "/images/SHOES/shoe-patent-oxford.png", aff: { label: "Browse at Loake", url: "https://www.loake.co.uk/collections/oxford-shoes" } },
-    { id: "loafer", label: "Loafer", tag: "Modern", price: "£80-£220", desc: "Works well with a slim modern suit. Less traditional but increasingly popular.", img: "/images/SHOES/shoe-loafer.png", aff: { label: "Browse at ASOS", url: "https://www.asos.com/men/shoes/loafers/cat/?cid=12521" } },
+    { id: "oxford", label: "Oxford", tag: "Most formal", price: "£80-£250", desc: "Closed lacing, clean and sleek. The classic wedding shoe. Works for suits and tuxedos.", img: "/images/SHOES/shoe-oxford.jpg", aff: { label: "Shop Oxfords at Loake", url: "https://www.loake.co.uk/collections/oxford-shoes" } },
+    { id: "derby", label: "Derby", tag: "Versatile", price: "£70-£200", desc: "Open lacing, slightly less formal but entirely appropriate for a suit.", img: "/images/SHOES/shoe-derby.jpg", aff: { label: "Shop at Clarks", url: "https://www.clarks.co.uk/mens-shoes/smart-shoes" } },
+    { id: "patent", label: "Patent Oxford", tag: "Black tie correct", price: "£100-£300", desc: "High-shine lacquered leather. The correct choice for a tuxedo. Looks exceptional with black tie.", img: "/images/SHOES/shoe-patent-oxford.jpg", aff: { label: "Browse at Loake", url: "https://www.loake.co.uk/collections/oxford-shoes" } },
+    { id: "loafer", label: "Loafer", tag: "Modern", price: "£80-£220", desc: "Works well with a slim modern suit. Less traditional but increasingly popular.", img: "/images/SHOES/shoe-loafer.jpg", aff: { label: "Browse at ASOS", url: "https://www.asos.com/men/shoes/loafers/cat/?cid=12521" } },
     { id: "existing", label: "Wearing what I have", desc: "Fine — just make sure they are clean and polished on the day." },
   ],
   groomsSay: [
@@ -193,11 +193,11 @@ const buttonStanceQuestion: Question = {
   key: "buttonStance", question: "Button stance?", sub: "How the jacket closes — more visible in photos than most grooms realise.",
   education: "Double-breasted is having a genuine moment right now. It looks significantly more distinctive than single-breasted in photos. If you have the confidence for it, 4x2 or 6x2 will look unlike almost every other groom in the room. Single-breasted 2-button is the safe, versatile default.",
   options: [
-    { id: "sb1", label: "Single-breasted 1-button", tag: "Very modern", desc: "One button at the waist. Extremely clean and contemporary. Works with peak lapel. Common on tuxedos.", img: "/images/JACKET_BUTTON_STANCE/jacket-single-1-button.png" },
-    { id: "sb2", label: "Single-breasted 2-button", tag: "Standard", desc: "The default on most suits. Versatile, flattering on every build, works for any venue.", img: "/images/JACKET_BUTTON_STANCE/jacket-single-2-button.png" },
-    { id: "sb3", label: "Single-breasted 3-button", desc: "More traditional and slightly more formal. Less common now but some grooms love the look.", img: "/images/JACKET_BUTTON_STANCE/jacket-single-3-button.png" },
-    { id: "db4", label: "Double-breasted 4x2", tag: "Bold revival", desc: "Four buttons show, two fasten. More modern of the two DB options. Fashion-forward and distinctive. Makes an impression.", img: "/images/JACKET_BUTTON_STANCE/jacket-double-4x2.png" },
-    { id: "db6", label: "Double-breasted 6x2", tag: "Classic DB", desc: "Six buttons show, two fasten. The traditional double-breasted silhouette. Very formal and assertive. Unlike almost every other groom in the room.", img: "/images/JACKET_BUTTON_STANCE/jacket-double-6x2.png" },
+    { id: "sb1", label: "Single-breasted 1-button", tag: "Very modern", desc: "One button at the waist. Extremely clean and contemporary. Works with peak lapel. Common on tuxedos.", img: "/images/JACKET_BUTTON_STANCE/jacket-single-1-button.jpg" },
+    { id: "sb2", label: "Single-breasted 2-button", tag: "Standard", desc: "The default on most suits. Versatile, flattering on every build, works for any venue.", img: "/images/JACKET_BUTTON_STANCE/jacket-single-2-button.jpg" },
+    { id: "sb3", label: "Single-breasted 3-button", desc: "More traditional and slightly more formal. Less common now but some grooms love the look.", img: "/images/JACKET_BUTTON_STANCE/jacket-single-3-button.jpg" },
+    { id: "db4", label: "Double-breasted 4x2", tag: "Bold revival", desc: "Four buttons show, two fasten. More modern of the two DB options. Fashion-forward and distinctive. Makes an impression.", img: "/images/JACKET_BUTTON_STANCE/jacket-double-4x2.jpg" },
+    { id: "db6", label: "Double-breasted 6x2", tag: "Classic DB", desc: "Six buttons show, two fasten. The traditional double-breasted silhouette. Very formal and assertive. Unlike almost every other groom in the room.", img: "/images/JACKET_BUTTON_STANCE/jacket-double-6x2.jpg" },
   ],
   groomsSay: [
     { quote: "Double-breasted 6x2 in navy. Six people asked me where I got it before dinner was served.", author: "u/dbgroom" },
@@ -209,11 +209,11 @@ const waistcoatQuestion: Question = {
   key: "waistcoat", question: "Waistcoat?", sub: "Adds formality and completes the three-piece look.",
   education: "A waistcoat adds formality and covers the shirt waist — particularly useful if you are not wearing a cummerbund with a tux. The horseshoe cut is the most elegant option and flatters almost every build. A plain waistcoat often adds more to the look than most grooms expect.",
   options: [
-    { id: "3-button", label: "3-button waistcoat", tag: "Clean", desc: "Standard, clean, and versatile. Works with almost any suit. The modern default.", img: "/images/WAISTCOATS/waistcoat-3-button.png" },
-    { id: "5-button", label: "5-button waistcoat", tag: "Classic", desc: "More formal and traditional. The classic wedding waistcoat. Covers more of the shirt front.", img: "/images/WAISTCOATS/waistcoat-5-button.png" },
-    { id: "db-waistcoat", label: "Double-breasted waistcoat", tag: "Bold", desc: "Works with double-breasted jackets or as a contrast piece with single-breasted. A genuine statement.", img: "/images/WAISTCOATS/waistcoat-double-breasted.png" },
-    { id: "horseshoe", label: "Horseshoe / low-cut", tag: "Most elegant", desc: "Deep U-shape showing more shirt and tie front. Very elegant and flattering. Works brilliantly with a self-tie bow tie on a tuxedo.", img: "/images/WAISTCOATS/waistcoat-horseshoe.png" },
-    { id: "cummerbund", label: "Cummerbund", tag: "Black tie", desc: "A wide pleated sash worn around the waist instead of a waistcoat. Traditional black tie correct. Pleats must face upward.", img: "/images/WAISTCOATS/cummerbund.png", aff: { label: "Browse at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/black-tie" } },
+    { id: "3-button", label: "3-button waistcoat", tag: "Clean", desc: "Standard, clean, and versatile. Works with almost any suit. The modern default.", img: "/images/WAISTCOATS/waistcoat-3-button.jpg" },
+    { id: "5-button", label: "5-button waistcoat", tag: "Classic", desc: "More formal and traditional. The classic wedding waistcoat. Covers more of the shirt front.", img: "/images/WAISTCOATS/waistcoat-5-button.jpg" },
+    { id: "db-waistcoat", label: "Double-breasted waistcoat", tag: "Bold", desc: "Works with double-breasted jackets or as a contrast piece with single-breasted. A genuine statement.", img: "/images/WAISTCOATS/waistcoat-double-breasted.jpg" },
+    { id: "horseshoe", label: "Horseshoe / low-cut", tag: "Most elegant", desc: "Deep U-shape showing more shirt and tie front. Very elegant and flattering. Works brilliantly with a self-tie bow tie on a tuxedo.", img: "/images/WAISTCOATS/waistcoat-horseshoe.jpg" },
+    { id: "cummerbund", label: "Cummerbund", tag: "Black tie", desc: "A wide pleated sash worn around the waist instead of a waistcoat. Traditional black tie correct. Pleats must face upward.", img: "/images/WAISTCOATS/cummerbund.jpg", aff: { label: "Browse at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/black-tie" } },
     { id: "none", label: "No waistcoat", tag: "Two-piece", desc: "Cleaner and more modern. Two-piece suits are entirely acceptable and many grooms prefer the less formal look." },
   ],
   groomsSay: [
@@ -226,9 +226,9 @@ const tieKnotQuestion: Question = {
   key: "tieKnot", question: "Which tie knot?", sub: "The knot changes the formality and proportion of the tie.",
   education: "The Full Windsor is often recommended for weddings but it only works if your collar has a wide enough spread. A Half Windsor is the safer choice for most collars and looks genuinely smart. The Four-in-hand is the most common knot and its slight asymmetry looks intentional rather than careless.",
   options: [
-    { id: "four-in-hand", label: "Four-in-hand", tag: "Most versatile", desc: "The most common knot. Slightly asymmetric, which looks intentional. Works with any collar width.", img: "/images/NECKWEAR/neckwear-four-in-hand.png" },
-    { id: "half-windsor", label: "Half Windsor", tag: "Recommended", desc: "Medium-sized symmetrical triangle. Versatile and genuinely smart. Works well with most collars.", img: "/images/NECKWEAR/neckwear-half-windsor.png" },
-    { id: "full-windsor", label: "Full Windsor", desc: "Large symmetrical knot. Very formal and imposing. Only works correctly with a wide spread collar — check before choosing.", img: "/images/NECKWEAR/neckwear-full-windsor.png" },
+    { id: "four-in-hand", label: "Four-in-hand", tag: "Most versatile", desc: "The most common knot. Slightly asymmetric, which looks intentional. Works with any collar width.", img: "/images/NECKWEAR/neckwear-four-in-hand.jpg" },
+    { id: "half-windsor", label: "Half Windsor", tag: "Recommended", desc: "Medium-sized symmetrical triangle. Versatile and genuinely smart. Works well with most collars.", img: "/images/NECKWEAR/neckwear-half-windsor.jpg" },
+    { id: "full-windsor", label: "Full Windsor", desc: "Large symmetrical knot. Very formal and imposing. Only works correctly with a wide spread collar — check before choosing.", img: "/images/NECKWEAR/neckwear-full-windsor.jpg" },
   ],
   groomsSay: [
     { quote: "Half Windsor. Not too big, not too small. Looked right with my turndown collar.", author: "u/knotgroom" },
@@ -240,10 +240,10 @@ const trouserQuestion: Question = {
   key: "trousers", question: "Trouser style?", sub: "The cut affects the whole silhouette from the waist down.",
   education: "Flat front trousers look best with slim and modern cuts. Pleats give more room and work better with looser, more traditional silhouettes. Turn-ups are a distinctly British detail — very elegant on a well-cut trouser. Side adjusters are correct for formal wear; belt loops are more casual.",
   options: [
-    { id: "flat-front", label: "Flat front", tag: "Modern default", desc: "No pleats. Clean and slim. The default on most contemporary suits. Works with almost any cut.", img: "/images/TROUSERS/trouser-flat-front.png" },
-    { id: "single-pleat", label: "Single pleat", desc: "One pleat per side. More room through the thigh. More traditional and works well with a fuller, classic cut.", img: "/images/TROUSERS/trouser-single-pleat.png" },
-    { id: "double-pleat", label: "Double pleat", tag: "Fashion revival", desc: "Two pleats per side. Very traditional. Having a genuine fashion revival with wider-leg silhouettes. Looks deliberate, not dated, when done right.", img: "/images/TROUSERS/trouser-double-pleat.png" },
-    { id: "turn-ups", label: "Turn-ups / cuffs", tag: "Distinctly British", desc: "The trouser hem folds back on itself. Adds weight and formality. A very elegant British detail that works especially well on a well-cut suit.", img: "/images/TROUSERS/trouser-turn-up.png" },
+    { id: "flat-front", label: "Flat front", tag: "Modern default", desc: "No pleats. Clean and slim. The default on most contemporary suits. Works with almost any cut.", img: "/images/TROUSERS/trouser-flat-front.jpg" },
+    { id: "single-pleat", label: "Single pleat", desc: "One pleat per side. More room through the thigh. More traditional and works well with a fuller, classic cut.", img: "/images/TROUSERS/trouser-single-pleat.jpg" },
+    { id: "double-pleat", label: "Double pleat", tag: "Fashion revival", desc: "Two pleats per side. Very traditional. Having a genuine fashion revival with wider-leg silhouettes. Looks deliberate, not dated, when done right.", img: "/images/TROUSERS/trouser-double-pleat.jpg" },
+    { id: "turn-ups", label: "Turn-ups / cuffs", tag: "Distinctly British", desc: "The trouser hem folds back on itself. Adds weight and formality. A very elegant British detail that works especially well on a well-cut suit.", img: "/images/TROUSERS/trouser-turn-up.jpg" },
     { id: "side-adjusters", label: "Side adjusters, no belt loops", tag: "Formally correct", desc: "Trousers with side adjusters rather than belt loops. The correct choice for formal wear and black tie. Cleaner and more elegant at the waist." },
   ],
   groomsSay: [
@@ -256,10 +256,10 @@ const pocketSquareFoldQuestion: Question = {
   key: "pocketSquareFold", question: "Pocket square fold?", sub: "The fold changes the formality and character of the whole chest.",
   education: "The flat presidential fold works for every suit and every occasion. If in doubt, use this one. The puff fold is the easiest to execute and looks intentionally relaxed. Avoid over-engineered multi-point folds — they can look like you tried too hard.",
   options: [
-    { id: "flat", label: "Flat fold / presidential", tag: "Safe choice", desc: "Clean straight edge visible above the pocket. Very formal and clean. Works with any suit and any occasion.", img: "/images/POCKET_SQUARES/pocket-square-flat-fold.png" },
-    { id: "one-point", label: "One-point fold", tag: "Classic", desc: "Single point facing up. Classic and simple. Slightly more characterful than flat.", img: "/images/POCKET_SQUARES/pocket-square-one-point.png" },
-    { id: "two-point", label: "Two-point fold", desc: "Two points angled slightly apart. More relaxed than one-point, still clean.", img: "/images/POCKET_SQUARES/pocket-square-two-point.png" },
-    { id: "puff", label: "Puff fold", tag: "Easiest", desc: "Soft rounded puff of fabric. Casual and relaxed. Looks intentionally effortless and works well with a linen or cotton pocket square.", img: "/images/POCKET_SQUARES/pocket-square-puff-fold.png" },
+    { id: "flat", label: "Flat fold / presidential", tag: "Safe choice", desc: "Clean straight edge visible above the pocket. Very formal and clean. Works with any suit and any occasion.", img: "/images/POCKET_SQUARES/pocket-square-flat-fold.jpg" },
+    { id: "one-point", label: "One-point fold", tag: "Classic", desc: "Single point facing up. Classic and simple. Slightly more characterful than flat.", img: "/images/POCKET_SQUARES/pocket-square-one-point.jpg" },
+    { id: "two-point", label: "Two-point fold", desc: "Two points angled slightly apart. More relaxed than one-point, still clean.", img: "/images/POCKET_SQUARES/pocket-square-two-point.jpg" },
+    { id: "puff", label: "Puff fold", tag: "Easiest", desc: "Soft rounded puff of fabric. Casual and relaxed. Looks intentionally effortless and works well with a linen or cotton pocket square.", img: "/images/POCKET_SQUARES/pocket-square-puff-fold.jpg" },
   ],
   groomsSay: [
     { quote: "Flat fold. Never going to be wrong, looks clean in every photo.", author: "u/flatfoldgroom" },
@@ -271,8 +271,8 @@ const waistOrCummerbundQuestion: Question = {
   key: "waistOrCummerbund", question: "Waistcoat or cummerbund?", sub: "Something needs to cover the trouser waistband. This is the choice.",
   education: "The waistband of your trousers and the shirt tucked into them sit between the bottom of your jacket and the top of your trousers. Without a waistcoat or cummerbund, this gap is visible every time your jacket opens. Both options cover it — they just do so with a completely different look and formality level.",
   options: [
-    { id: "waistcoat", label: "Waistcoat", tag: "Most popular", desc: "More contemporary than a cummerbund. Works for both suits and tuxedos. A five-button waistcoat is the most versatile choice. Leave the bottom button undone.", img: "/images/WAISTCOATS/waistcoat-5-button.png", pros: ["Works for suits and tuxedos", "More familiar and easier to wear", "Wide range of styles and cuts"], cons: ["Adds warmth — can get hot in summer"] },
-    { id: "cummerbund", label: "Cummerbund", tag: "Traditional black tie", desc: "A wide pleated sash worn around the waist. Traditional black tie correct. Less common now but genuinely elegant when worn properly. Pleats must face upward — this is non-negotiable.", img: "/images/WAISTCOATS/cummerbund.png", pros: ["Correct for formal black tie", "Lighter and cooler than a waistcoat", "Very elegant when done right"], cons: ["Pleats face upward — easy to put on incorrectly", "Less familiar to most grooms"], aff: { label: "Browse at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/black-tie" } },
+    { id: "waistcoat", label: "Waistcoat", tag: "Most popular", desc: "More contemporary than a cummerbund. Works for both suits and tuxedos. A five-button waistcoat is the most versatile choice. Leave the bottom button undone.", img: "/images/WAISTCOATS/waistcoat-5-button.jpg", pros: ["Works for suits and tuxedos", "More familiar and easier to wear", "Wide range of styles and cuts"], cons: ["Adds warmth — can get hot in summer"] },
+    { id: "cummerbund", label: "Cummerbund", tag: "Traditional black tie", desc: "A wide pleated sash worn around the waist. Traditional black tie correct. Less common now but genuinely elegant when worn properly. Pleats must face upward — this is non-negotiable.", img: "/images/WAISTCOATS/cummerbund.jpg", pros: ["Correct for formal black tie", "Lighter and cooler than a waistcoat", "Very elegant when done right"], cons: ["Pleats face upward — easy to put on incorrectly", "Less familiar to most grooms"], aff: { label: "Browse at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/black-tie" } },
     { id: "neither", label: "Neither", desc: "A clean two-piece look with no waistcoat or cummerbund. Works for modern slim-cut tuxedos where the jacket sits close to the body. Only works if the jacket fits well enough that the waistband gap is never visible.", pros: ["Cleaner and more minimal", "Cooler in warm weather"], cons: ["The waistband gap will be visible if the jacket swings open", "Only works with a very well-fitted jacket"] },
   ],
   groomsSay: [
