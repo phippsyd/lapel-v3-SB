@@ -213,9 +213,9 @@ function getWaistcoatQuestion(style: string): Question {
   key: "waistcoat", question: "Waistcoat?", sub: "Adds formality and completes the three-piece look.",
   education: "A waistcoat adds formality and covers the shirt waist — particularly useful if you are not wearing a cummerbund with a tux. The horseshoe cut is the most elegant option and flatters almost every build. A plain waistcoat often adds more to the look than most grooms expect.",
   options: [
-    { id: "3-button", label: "3-button waistcoat", tag: "Clean", desc: "Standard, clean, and versatile. Works with almost any suit. The modern default.", img: "/images/WAISTCOATS/waistcoat-3-button.jpg" },
-    { id: "5-button", label: "5-button waistcoat", tag: "Classic", desc: "More formal and traditional. The classic wedding waistcoat. Covers more of the shirt front.", img: "/images/WAISTCOATS/waistcoat-5-button.jpg" },
-    { id: "db-waistcoat", label: "Double-breasted waistcoat", tag: "Bold", desc: "Works with double-breasted jackets or as a contrast piece with single-breasted. A genuine statement.", img: "/images/WAISTCOATS/waistcoat-double-breasted.jpg" },
+    { id: "3-button", label: "3-button waistcoat", tag: "Clean", desc: "Standard, clean, and versatile. Works with almost any suit. The modern default.", img: style === "tux" ? "/images/WAISTCOATS/waistcoat-3-button-tux.jpg" : "/images/WAISTCOATS/waistcoat-3-button.jpg" },
+    { id: "5-button", label: "5-button waistcoat", tag: "Classic", desc: "More formal and traditional. The classic wedding waistcoat. Covers more of the shirt front.", img: style === "tux" ? "/images/WAISTCOATS/waistcoat-5-button-tux.jpg" : "/images/WAISTCOATS/waistcoat-5-button.jpg" },
+    { id: "db-waistcoat", label: "Double-breasted waistcoat", tag: "Bold", desc: "Works with double-breasted jackets or as a contrast piece with single-breasted. A genuine statement.", img: style === "tux" ? "/images/WAISTCOATS/waistcoat-double-breasted-tux.jpg" : "/images/WAISTCOATS/waistcoat-double-breasted.jpg" },
     { id: "horseshoe", label: "Horseshoe / low-cut", tag: "Most elegant", desc: "Deep U-shape showing more shirt and tie front. Very elegant and flattering. Works brilliantly with a self-tie bow tie on a tuxedo.", img: "/images/WAISTCOATS/waistcoat-horseshoe.jpg" },
     { id: "cummerbund", label: "Cummerbund", tag: "Black tie", desc: "A wide pleated sash worn around the waist instead of a waistcoat. Traditional black tie correct. Pleats must face upward.", img: "/images/WAISTCOATS/cummerbund.jpg", aff: { label: "Browse at Hawes and Curtis", url: "https://www.hawesandcurtis.co.uk/mens/black-tie" } },
     { id: "none", label: "No waistcoat", tag: "Two-piece", desc: "Cleaner and more modern. Two-piece suits are entirely acceptable and many grooms prefer the less formal look.", img: noneImg },
@@ -320,21 +320,34 @@ function AttireSummaryScreen({ answers, saved, onSave, onRestart }: {
 }) {
   const isHire = answers.hireBuy === "hire";
 
-  const hireSuppliers = [
-    { name: "Moss Bros", desc: "The most accessible hire option. Free fittings, wide stock, over 100 UK stores.", url: "https://www.mossbros.co.uk/hire" },
+  const isTux = answers.style === "tux";
+
+  const hireSuppliers = isTux ? [
+    { name: "Moss Bros", desc: "The UK's biggest formalwear hirer. Strong tuxedo and dinner suit range, free fittings, over 100 stores.", url: "https://www.mossbroshire.co.uk/occasion/black-tie" },
+    { name: "Savoy Taylors Guild", desc: "Traditional hire specialists. Excellent for classic black tie and formal evening styles.", url: "https://www.savoytaylorsguild.co.uk" },
+    { name: "Dobell", desc: "Online tuxedo hire with good value pricing. Strong range of slim-fit dinner suits.", url: "https://www.dobell.co.uk" },
+    { name: "Slaters", desc: "Best coverage in Scotland and the North. Good black tie range and helpful in-store service.", url: "https://www.slaters.co.uk" },
+    { name: "Lipman & Sons", desc: "Specialist hire tailors with a strong reputation for formalwear fit and finish.", url: "https://www.lipmanandsons.co.uk" },
+  ] : [
+    { name: "Moss Bros", desc: "The most accessible hire option. Free fittings, wide stock, over 100 UK stores.", url: "https://www.mossbroshire.co.uk" },
     { name: "Savoy Taylors Guild", desc: "Traditional hire specialists. Good for morning suits and classic formal styles.", url: "https://www.savoytaylorsguild.co.uk" },
     { name: "Dobell", desc: "Online hire with good value pricing. Strong range of slim-fit and contemporary styles.", url: "https://www.dobell.co.uk" },
     { name: "Slaters", desc: "Best coverage in Scotland and the North. Competitive pricing and helpful in-store service.", url: "https://www.slaters.co.uk" },
-    { name: "Lipman and Sons", desc: "Specialist hire tailors with a strong reputation for fit and finish.", url: "#lipman" },
-    { name: "Rathbones Tailor", desc: "Independent hire specialists. Worth considering if you want something more personal than a high street fitting.", url: "#rathbones" },
+    { name: "Lipman & Sons", desc: "Specialist hire tailors with a strong reputation for fit and finish.", url: "https://www.lipmanandsons.co.uk" },
   ];
 
-  const buySuppliers = [
+  const buySuppliers = isTux ? [
+    { name: "Moss", desc: "Dedicated wedding tuxedo collection — classic black and midnight blue through to velvet. Buy off the rack or custom-made.", url: "https://www.moss.co.uk/weddings/tuxedos" },
+    { name: "Reiss", desc: "Premium off-the-peg dinner suits. The fabrics and cut are noticeably better if budget allows.", url: "https://www.reiss.com/mens/suits/tuxedos" },
+    { name: "Hawes & Curtis", desc: "Strong on the whole black tie package — dinner suits, dress shirts, bow ties and studs in one place.", url: "https://www.hawesandcurtis.co.uk/mens/black-tie" },
+    { name: "Charles Tyrwhitt", desc: "Reliable dinner jackets and excellent dress shirts. Good value for a complete black tie look.", url: "https://www.ctshirts.com" },
+    { name: "Next", desc: "Best value on the high street. Solid tuxedos from around £150 that photograph well.", url: "https://www.next.co.uk/shop/gender-men/category-suits" },
+  ] : [
+    { name: "Moss", desc: "Wedding suit specialist. Off the rack, custom-made, or hire — three-piece and two-piece in a wide range of fabrics.", url: "https://www.moss.co.uk/the-wedding-shop" },
     { name: "Next", desc: "Best value on the high street. Solid suits from £200 that photograph well.", url: "https://www.next.co.uk/shop/gender-men/category-suits" },
     { name: "Ted Baker", desc: "Strong mid-market option. Good cuts and interesting fabrics around £350–£550.", url: "https://www.tedbaker.com" },
     { name: "Charles Tyrwhitt", desc: "Worth visiting for shirts and separates as well as suits. Reliable quality.", url: "https://www.ctshirts.com" },
     { name: "Reiss", desc: "Premium off-the-peg. Worth it if budget allows — the fabrics and cut are noticeably better.", url: "https://www.reiss.com" },
-    { name: "ASOS", desc: "Budget-friendly option. Good for younger grooms or if this is a one-wear occasion.", url: "https://www.asos.com/men/suits" },
   ];
 
   const suppliers = !answers.hireBuy || isHire ? hireSuppliers : buySuppliers;
