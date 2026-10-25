@@ -8,6 +8,7 @@ export type StagGuide = {
   locals: string[]; // how the city feels about stag groups
   gettingIn: string[]; // bars, group size, door staff, fancy dress
   areas: { name: string; text: string }[];
+  sections?: { title: string; body: string[] }[]; // optional extra sections, e.g. for big cities
   doing: { name: string; text: string }[];
   plan: { day: string; text: string }[];
   stay: string[];

@@ -240,6 +240,7 @@ function DestinationPage({ d, g }: { d: Destination; g: StagGuide }) {
           <Section title="Where to drink">
             <dl className="list">{g.areas.map(a => <div key={a.name}><dt>{a.name}</dt><dd>{a.text}</dd></div>)}</dl>
           </Section>
+          {g.sections?.map(s => <Section key={s.title} title={s.title}>{paras(s.body)}</Section>)}
           <Section title="What to do">
             <dl className="list">{g.doing.map(a => <div key={a.name}><dt>{a.name}</dt><dd>{a.text}</dd></div>)}</dl>
           </Section>
