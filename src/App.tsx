@@ -367,7 +367,7 @@ export default function Lapel() {
               </h2>
               <div style={{ maxWidth: 560, fontSize: 15, lineHeight: 1.75, color: T.ink }}>
                 <p style={{ marginBottom: 16 }}>
-                  When my brother Tom asked me to be his best man, we went suit shopping. During the fitting, the assistant asked which lapel I wanted.
+                  When my brother asked me to be his best man, we went suit shopping. During the fitting, the assistant asked which lapel I wanted.
                 </p>
                 <p style={{ marginBottom: 16 }}>
                   I had no idea. He held up two jackets, one with a peak lapel and one with a shawl, and waited. It turned out to be the first of many decisions that afternoon that I hadn&rsquo;t known I&rsquo;d have to make. I left feeling rushed, and wishing I&rsquo;d done my homework.
