@@ -39,11 +39,14 @@ a{color:inherit}
 h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
 .wrap{max-width:1080px;margin:0 auto;padding:0 32px}
 .hdr{background:${T.navy}}
-.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
-.brand{font-family:'DM Serif Display',serif;font-size:26px;color:#fff;text-decoration:none;letter-spacing:-.01em}
-.nav{display:flex;gap:28px}
-.nav a{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none}
-.nav a:hover,.nav a.on{color:#fff}
+.hwrap{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:'DM Serif Display',serif;font-size:26px;color:#fff;text-decoration:none;letter-spacing:-.01em;flex-shrink:0}
+.nav{display:flex;gap:28px;align-items:center}
+.nav a{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;border-bottom:1.5px solid transparent;padding-bottom:2px;white-space:nowrap}
+.nav a:hover{color:rgba(255,255,255,.8)}
+.nav a.on{color:#fff;border-bottom-color:#fff}
+.prof{flex-shrink:0;margin-left:16px;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:6px 16px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;text-decoration:none;white-space:nowrap}
+.prof:hover{color:#fff}
 .hero{background:${T.navy};padding:8px 0 56px;color:#fff}
 .crumbs{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:28px}
 .crumbs a{text-decoration:none;color:rgba(255,255,255,.7)}
@@ -102,6 +105,7 @@ main .wrap{padding-top:48px;padding-bottom:64px}
 @media(max-width:768px){
  .wrap{padding:0 20px}
  .nav{display:none}
+ .hwrap{padding:0 20px}
  .spread{grid-template-columns:1fr;gap:32px}
  .hero h1{font-size:38px}
  .plate{justify-self:start;max-width:220px}
@@ -118,11 +122,12 @@ function Shell({ active, children }: { active: string; children: ReactNode }) {
   return (
     <>
       <header className="hdr">
-        <div className="wrap">
+        <div className="hwrap">
           <a className="brand" href="/">Lapel</a>
           <nav className="nav">
             {NAV.map(n => <a key={n.href} href={n.href} className={n.href === active ? "on" : undefined}>{n.label}</a>)}
           </nav>
+          <a className="prof" href="/profile">My profile</a>
         </div>
       </header>
       {children}
