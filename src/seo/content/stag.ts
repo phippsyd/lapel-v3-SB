@@ -16,7 +16,10 @@ export type StagGuide = {
   watchOuts: string[];
 };
 
+import { BATCH1 } from "./stag-batch1";
+
 export const STAG_GUIDES: Record<string, StagGuide> = {
+  ...BATCH1,
   edinburgh: {
     checked: "October 2026",
     intro: [

@@ -175,8 +175,9 @@ const breadcrumbLd = (items: { name: string; path: string }[]) => ({
 });
 
 function relatedFor(d: Destination): Destination[] {
+  // Only link to destinations that have a published page.
   return ALL_DESTINATIONS
-    .filter(o => o.id !== d.id && o.region === d.region)
+    .filter(o => o.id !== d.id && o.region === d.region && STAG_GUIDES[o.id])
     .map(o => ({ o, score: o.type.filter(t => d.type.includes(t)).length + o.vibe.filter(v => d.vibe.includes(v)).length * 0.5 }))
     .filter(x => x.score > 0)
     .sort((a, b) => b.score - a.score)
