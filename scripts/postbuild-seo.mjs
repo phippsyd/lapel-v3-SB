@@ -90,3 +90,18 @@ for (const p of pages) {
   writeFileSync(join(dir, "index.html"), p.html);
 }
 console.log(`seo: ${pages.length} static content pages generated.`);
+
+// Sitemap: the app routes plus every static page, with today's date.
+const today = new Date().toISOString().slice(0, 10);
+const urls = [
+  { loc: "/", priority: "1.0" },
+  ...ROUTES.map(r => ({ loc: `/${r.slug}`, priority: r.slug === "faq" ? "0.8" : "0.9" })),
+  ...pages.map(p => ({ loc: p.path, priority: "0.7" })),
+];
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u => `  <url><loc>${ORIGIN}${u.loc}</loc><lastmod>${today}</lastmod><priority>${u.priority}</priority></url>`).join("\n")}
+</urlset>
+`;
+writeFileSync(join(DIST, "sitemap.xml"), sitemap);
+console.log(`seo: sitemap written with ${urls.length} URLs.`);
