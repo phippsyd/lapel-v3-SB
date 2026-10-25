@@ -5,13 +5,13 @@ import { IntroScreen, Progress, OptionCard, GoodToKnow, GroomsSay, AffLink, type
 import { usePersistentState } from "../persistence";
 import { encodeHandover } from "../handover-codec";
 
-type Destination = {
+export type Destination = {
   id: string; label: string; country: string; type: string[]; vibe: string[]; region: string;
   tag?: string; desc: string; stagInfo: string; meta: Record<string, string>;
   aff: { label: string; url: string };
 };
 
-const ALL_DESTINATIONS: Destination[] = [
+export const ALL_DESTINATIONS: Destination[] = [
 
   // ─── UK & IRELAND ───────────────────────────────────────────────────────────
 
@@ -538,7 +538,7 @@ const VIBE_LABELS: Record<string, string> = {
   "mix": "Bit of everything",
 };
 
-const STAG_TYPES = [
+export const STAG_TYPES = [
   { id: "city-party", label: "City break and nights out", desc: "Bars, clubs, exploring a new city. The most common stag format." },
   { id: "beach", label: "Beach and sun", desc: "Pool days, beach clubs, warm evenings." },
   { id: "ski", label: "Ski trip", desc: "Skiing or snowboarding in the day, apres ski and mountain bars in the evening." },

@@ -68,3 +68,25 @@ for (const r of ROUTES) {
 }
 
 console.log(`seo: ${ROUTES.length} route pages generated.`);
+
+// ── Static content pages ────────────────────────────────────────────────────
+// Compiles src/seo/pages.tsx with Vite's API (no config or package.json
+// changes), then writes each page as plain HTML into dist. Vercel serves real
+// files before the SPA rewrite in vercel.json, so these load as static pages.
+const { build } = await import("vite");
+const { pathToFileURL } = await import("node:url");
+const TMP = "node_modules/.cache/lapel-seo";
+await build({
+  configFile: false,
+  logLevel: "warn",
+  esbuild: { jsx: "automatic" },
+  build: { ssr: "src/seo/pages.tsx", outDir: TMP, emptyOutDir: true, rollupOptions: { output: { entryFileNames: "pages.mjs" } } },
+});
+const { renderPages } = await import(pathToFileURL(join(TMP, "pages.mjs")).href + "?t=" + Date.now());
+const pages = renderPages();
+for (const p of pages) {
+  const dir = join(DIST, p.path.replace(/^\//, ""));
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "index.html"), p.html);
+}
+console.log(`seo: ${pages.length} static content pages generated.`);
