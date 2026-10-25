@@ -65,7 +65,7 @@ main .wrap{padding-top:48px;padding-bottom:64px}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid ${T.rule};border-bottom:1px solid ${T.rule};margin-bottom:48px}
 .facts div{padding:20px 20px 20px 0}
 .facts dt{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:${T.mid};margin-bottom:6px}
-.facts dd{font-family:'DM Serif Display',serif;font-size:20px;line-height:1.25}
+.facts dd{font-family:'DM Serif Display',serif;font-size:18px;line-height:1.3}
 .cols{display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:48px}
 .cols h2{font-size:28px;line-height:1.1}
 .body p{font-size:16px;line-height:1.75;max-width:620px}
@@ -206,7 +206,9 @@ const paras = (ps: string[]) => ps.map((p, i) => <p key={i}>{p}</p>);
 function DestinationPage({ d, g }: { d: Destination; g: StagGuide }) {
   const photo = DESTINATION_PHOTOS[d.id];
   const related = relatedFor(d);
-  const facts = Object.entries(d.meta).slice(0, 4);
+  // The app's Travel/Flights values assume the reader starts in London, so
+  // the guide pages show where you arrive instead.
+  const facts: [string, string][] = [["Getting there", g.arrive] as [string, string], ...Object.entries(d.meta).filter(([k]) => k !== "Travel" && k !== "Flights")].slice(0, 4);
   const goodFor = d.type.map(t => TYPE_LABEL[t]).filter(Boolean);
   return (
     <Shell active="/stag">

@@ -3,6 +3,7 @@ import type { StagGuide } from "./stag";
 export const BATCH1: Record<string, StagGuide> = {
   newcastle: {
     checked: "October 2026",
+    arrive: "Newcastle Central station, or Newcastle Airport with the Metro into town",
     intro: [
       "Newcastle has a reputation as the best night out in England, and the city does its best to live up to it every weekend. Everything is close together, the drinks are cheaper than most of the south, and the people are about as friendly as you'll find anywhere in the country.",
       "It works for almost any group. The Bigg Market is cheap and loud, the Quayside is a bit smarter, and the Diamond Strip is where you go if the group owns proper shoes. Add a match at St James' Park, a walk along the Tyne and a long Sunday lunch, and it's a very easy weekend to plan.",
@@ -43,7 +44,6 @@ export const BATCH1: Record<string, StagGuide> = {
     ],
     costs: [
       { item: "Pint", amount: "Usually £4–£6. Bigg Market bars are the cheapest, Quayside and Diamond Strip bars the most expensive." },
-      { item: "Advance train from London", amount: "Often £40–£80 each way if booked early. Around three hours." },
       { item: "Nightlife wristband", amount: "Varies by company and package. Check what's included before you buy." },
     ],
     costNote: "Prices change, so check before you book.",
@@ -56,6 +56,7 @@ export const BATCH1: Record<string, StagGuide> = {
 
   liverpool: {
     checked: "October 2026",
+    arrive: "Liverpool Lime Street station, or Liverpool John Lennon Airport",
     intro: [
       "Liverpool has become one of the most popular stag cities in the country, and it's easy to see why. The nightlife is huge, the music is everywhere, the food has got very good, and the city has a sense of humour that suits a group of lads on a weekend away.",
       "It's also a city with enough going on in the daytime to keep everyone happy. There's the waterfront, the football, the Beatles if anyone in the group cares, and the Grand National if your timing is right.",
@@ -97,7 +98,6 @@ export const BATCH1: Record<string, StagGuide> = {
       { item: "Pint", amount: "Roughly £5–£6 in the main nightlife areas" },
       { item: "Stein at a beer hall", amount: "From around £8" },
       { item: "Club entry", amount: "Often free early, around £5–£10 later on" },
-      { item: "Advance train from London", amount: "Often £35–£70 each way if booked early. Just over two hours." },
     ],
     costNote: "Prices change, so check before you book.",
     watchOuts: [
@@ -109,6 +109,7 @@ export const BATCH1: Record<string, StagGuide> = {
 
   manchester: {
     checked: "October 2026",
+    arrive: "Manchester Piccadilly station, or Manchester Airport",
     intro: [
       "Manchester has everything a big city stag needs. The nightlife is enormous, the food is excellent, there's football at two of the most famous clubs in the world, and the city is easy to get to from almost anywhere in the country.",
       "It suits groups who want variety. You can spend Friday in the Northern Quarter's small bars, Saturday at a match or an activity, and Saturday night in the bigger clubs around Deansgate, all within walking distance of each other.",
@@ -148,7 +149,6 @@ export const BATCH1: Record<string, StagGuide> = {
     costs: [
       { item: "Pint", amount: "Roughly £5–£6.50 in the city centre" },
       { item: "Cocktail", amount: "Roughly £10–£14" },
-      { item: "Advance train from London", amount: "Often £30–£70 each way if booked early. About two hours." },
     ],
     costNote: "Prices change, so check before you book.",
     watchOuts: [
@@ -160,6 +160,7 @@ export const BATCH1: Record<string, StagGuide> = {
 
   prague: {
     checked: "October 2026",
+    arrive: "Václav Havel Airport, 30–40 minutes from the centre",
     intro: [
       "Prague was the original European stag destination, and for many groups it still is. The beer is some of the best in the world, the city is beautiful, and it's a short, cheap flight from most UK airports.",
       "It has changed, though. The city has spent the last few years trying to move away from its reputation as a cheap party town, and there are rules and attitudes you need to know about before you go. Plan around them and Prague is still a brilliant weekend.",
@@ -201,7 +202,6 @@ export const BATCH1: Record<string, StagGuide> = {
     ],
     costs: [
       { item: "Half-litre of lager", amount: "Much cheaper than the UK in ordinary pubs. Tourist bars in the Old Town charge far more." },
-      { item: "Flights", amount: "Often under £100 return from UK airports if booked early" },
       { item: "Currency", amount: "Czech koruna, not euros. Pay by card or in koruna." },
     ],
     costNote: "Prices change, so check before you book.",
@@ -215,6 +215,7 @@ export const BATCH1: Record<string, StagGuide> = {
 
   budapest: {
     checked: "October 2026",
+    arrive: "Ferenc Liszt Airport, 30–40 minutes from the centre by bus or taxi",
     intro: [
       "Budapest is one of the best stag cities in Europe. It has the ruin bars, the thermal baths, the river, cheap drinks and food, and nights that genuinely don't end until the sun comes up. It's also stunning, which helps when the group needs a reason to leave the bar.",
       "Like Prague, it's become more careful about stag tourism. Most of the rules are easy to live with, but a few can cost you money or a night with the police, so it's worth knowing them before you land.",
@@ -255,7 +256,6 @@ export const BATCH1: Record<string, StagGuide> = {
     costs: [
       { item: "Beer", amount: "Much cheaper than the UK in ordinary bars. Clubs and tourist spots charge more." },
       { item: "Cocktail", amount: "Roughly 3,800–4,600 forints in a good bar" },
-      { item: "Flights", amount: "Often under £120 return from UK airports if booked early" },
       { item: "Currency", amount: "Hungarian forint. Cards are widely accepted." },
     ],
     costNote: "Prices change, so check before you book.",

@@ -3,8 +3,9 @@ import type { StagGuide } from "./stag";
 export const BATCH2: Record<string, StagGuide> = {
   bristol: {
     checked: "October 2026",
+    arrive: "Bristol Temple Meads station, or Bristol Airport",
     intro: [
-      "Bristol has become one of the most booked stag cities in the UK. It's two hours from London, the harbour is a lovely place to drink on a sunny afternoon, and the food and music scenes punch well above the city's size.",
+      "Bristol has become one of the most booked stag cities in the UK. It's easy to reach by train from most of the country, the harbour is a lovely place to drink on a sunny afternoon, and the food and music scenes punch well above the city's size.",
       "It suits a group that wants more than a club crawl. There's cider, street art, a harbour full of boats and bars, and some excellent pubs, with big nights available on Park Street and around the Harbourside if you want them.",
     ],
     locals: [
@@ -41,7 +42,6 @@ export const BATCH2: Record<string, StagGuide> = {
     ],
     costs: [
       { item: "Pint", amount: "Roughly £5–£6.50 in the centre" },
-      { item: "Advance train from London", amount: "Often £25–£60 each way if booked early. Under two hours." },
     ],
     costNote: "Prices change, so check before you book.",
     watchOuts: [
@@ -53,8 +53,9 @@ export const BATCH2: Record<string, StagGuide> = {
 
   cardiff: {
     checked: "October 2026",
+    arrive: "Cardiff Central station, or Cardiff Airport",
     intro: [
-      "Cardiff is a brilliant stag city with a reputation that's grown fast. It's compact, good value, very welcoming and about two hours from London by train. On a rugby weekend it's one of the best atmospheres in British sport.",
+      "Cardiff is a brilliant stag city with a reputation that's grown fast. It's compact, good value, very welcoming and easy to reach by train. On a rugby weekend it's one of the best atmospheres in British sport.",
       "Everything is close together. The main nightlife sits a few minutes' walk from the stadium and the station, and Cardiff Bay is a short bus or boat ride away for a calmer afternoon.",
     ],
     locals: [
@@ -94,7 +95,6 @@ export const BATCH2: Record<string, StagGuide> = {
       { item: "Pint", amount: "Roughly £4–£6" },
       { item: "Cocktail", amount: "Roughly £7–£10" },
       { item: "Club entry", amount: "Roughly £5–£15" },
-      { item: "Advance train from London", amount: "Often £30–£60 each way if booked early. About two hours." },
     ],
     costNote: "Prices change, so check before you book.",
     watchOuts: [
@@ -106,6 +106,7 @@ export const BATCH2: Record<string, StagGuide> = {
 
   glasgow: {
     checked: "October 2026",
+    arrive: "Glasgow Central or Queen Street station, or Glasgow Airport",
     intro: [
       "Glasgow is a better night out than Edinburgh, and most people who've done both will tell you so. It's bigger, cheaper and louder, the people are some of the friendliest in Britain, and the music scene is one of the best in Europe.",
       "It's less obviously beautiful than Edinburgh, but the West End, the Merchant City and the river all have plenty going on, and Loch Lomond is under an hour away if the group wants to see some scenery.",
@@ -144,7 +145,6 @@ export const BATCH2: Record<string, StagGuide> = {
     ],
     costs: [
       { item: "Pint", amount: "Usually cheaper than Edinburgh, roughly £4.50–£6" },
-      { item: "Advance train from London", amount: "Often £40–£80 each way if booked early. About four and a half hours." },
     ],
     costNote: "Prices change, so check before you book.",
     watchOuts: [
@@ -156,8 +156,9 @@ export const BATCH2: Record<string, StagGuide> = {
 
   leeds: {
     checked: "October 2026",
+    arrive: "Leeds station, or Leeds Bradford Airport",
     intro: [
-      "Leeds is one of the best-value stag cities in the north. It's two hours from London, the city centre is compact, and there's a huge student population, which keeps the nightlife busy every night of the week.",
+      "Leeds is one of the best-value stag cities in the north. It sits on the main rail lines north and south, the city centre is compact, and there's a huge student population, which keeps the nightlife busy every night of the week.",
       "It also has the Otley Run, the famous fancy-dress pub crawl through Headingley, which is a stag weekend in itself.",
     ],
     locals: [
@@ -193,7 +194,6 @@ export const BATCH2: Record<string, StagGuide> = {
     ],
     costs: [
       { item: "Pint", amount: "Roughly £4.50–£6" },
-      { item: "Advance train from London", amount: "Often £30–£60 each way if booked early. Just over two hours." },
     ],
     costNote: "Prices change, so check before you book.",
     watchOuts: [
@@ -205,6 +205,7 @@ export const BATCH2: Record<string, StagGuide> = {
 
   dublin: {
     checked: "October 2026",
+    arrive: "Dublin Airport, 30–45 minutes from the centre, or the ferry into Dublin Port",
     intro: [
       "Dublin is one of the classic stag weekends for a reason. It's an hour's flight from most of the UK, the pubs are some of the best in the world, and the Guinness tastes like it should.",
       "It's expensive, though, and Temple Bar in particular will empty your wallet. Plan to spend most of your time where locals drink, and you'll get a much better weekend for less money.",
@@ -257,6 +258,7 @@ export const BATCH2: Record<string, StagGuide> = {
 
   amsterdam: {
     checked: "October 2026",
+    arrive: "Schiphol Airport, about 15 minutes by train to Amsterdam Centraal",
     intro: [
       "Amsterdam is still one of the most popular stag destinations in Europe, but the city has made it very clear it no longer wants stag groups looking for a messy weekend. Go with the right expectations, though, and it's a fantastic place to spend a few days.",
       "The canals, the brown cafés, the beer and the food are excellent, and the city is easy to get around by bike, tram or on foot. Most of the rules are aimed at the Red Light District, so a group that spends more time elsewhere will barely notice them.",
@@ -296,7 +298,6 @@ export const BATCH2: Record<string, StagGuide> = {
     costs: [
       { item: "Beer", amount: "More expensive than the UK in most central bars" },
       { item: "Tourist tax", amount: "12.5% of the nightly room rate" },
-      { item: "Flights", amount: "Often under £100 return from UK airports if booked early" },
       { item: "Currency", amount: "Euro" },
     ],
     costNote: "Prices change, so check before you book.",

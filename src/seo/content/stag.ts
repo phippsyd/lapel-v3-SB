@@ -4,6 +4,7 @@
 
 export type StagGuide = {
   checked: string; // month the facts were last checked, e.g. "October 2026"
+  arrive: string; // where you arrive, so the page never assumes where the reader is travelling from
   intro: string[];
   locals: string[]; // how the city feels about stag groups
   gettingIn: string[]; // bars, group size, door staff, fancy dress
@@ -27,6 +28,7 @@ export const STAG_GUIDES: Record<string, StagGuide> = {
   ...BATCH3,
   edinburgh: {
     checked: "October 2026",
+    arrive: "Edinburgh Waverley station, or Edinburgh Airport",
     intro: [
       "Edinburgh gets picked for stags more than almost anywhere else in the UK, and for good reason. The Old Town looks like a film set, the pubs are proper pubs, and you can fit a castle, a hill, a whisky tasting and a very late night into one weekend without anyone getting in a car.",
       "It also suits a mixed group better than most stag cities. The lads who want a big night get the Cowgate. The ones who'd rather a good dinner and a dram get the New Town and Leith. Everyone gets Arthur's Seat the next morning, whether they like it or not.",
@@ -70,7 +72,6 @@ export const STAG_GUIDES: Record<string, StagGuide> = {
     costs: [
       { item: "Pint", amount: "£5–£7, around £6 on average. Royal Mile and Grassmarket pubs charge the most." },
       { item: "Cocktail", amount: "£10.50–£15" },
-      { item: "Advance train from London", amount: "Often £40–£70 each way if booked early. Much more on the day." },
       { item: "Whisky tasting", amount: "Roughly £20–£60 a head, depending on what you drink" },
     ],
     costNote: "Prices change, so check before you book.",
