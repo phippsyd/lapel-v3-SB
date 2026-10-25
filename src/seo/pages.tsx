@@ -6,6 +6,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import type { ReactNode } from "react";
 import { T } from "../theme";
 import { ALL_DESTINATIONS, DESTINATION_PHOTOS, STAG_TYPES, type Destination } from "../modules/Stag";
+import { STAG_GUIDES, type StagGuide } from "./content/stag";
 
 const ORIGIN = "https://www.lapelguide.co.uk";
 
@@ -65,6 +66,20 @@ main .wrap{padding-top:48px;padding-bottom:64px}
 .cols{display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:48px}
 .cols h2{font-size:28px;line-height:1.1}
 .body p{font-size:16px;line-height:1.75;max-width:620px}
+.body p+p{margin-top:14px}
+.list div{padding:14px 0;border-bottom:1px solid ${T.rule}}
+.list div:first-child{padding-top:0}
+.list dt{font-family:'DM Serif Display',serif;font-size:19px;margin-bottom:4px}
+.list dd{font-size:15px;line-height:1.7;max-width:620px}
+.costs{border-collapse:collapse;max-width:620px;width:100%}
+.costs th,.costs td{text-align:left;vertical-align:top;padding:12px 0;border-bottom:1px solid ${T.rule};font-size:15px;line-height:1.6}
+.costs th{font-weight:600;width:38%;padding-right:16px}
+.note,.checked{font-size:13px;color:${T.mid};margin-top:12px}
+.checked{margin:-16px 0 32px}
+.bullets{list-style:none;max-width:620px}
+.bullets li{font-size:15px;line-height:1.7;padding:12px 0 12px 18px;border-bottom:1px solid ${T.rule};position:relative}
+.bullets li:before{content:"";position:absolute;left:0;top:23px;width:6px;height:6px;background:${T.navy};border-radius:50%}
+.cols{display:grid;grid-template-columns:220px 1fr;gap:48px;margin-bottom:48px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .chips span{font-size:12px;background:${T.white};border:1px solid ${T.rule};border-radius:2px;padding:6px 12px}
 .cta{background:${T.white};border:1px solid ${T.rule};border-radius:6px;padding:28px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:56px}
@@ -169,7 +184,20 @@ function relatedFor(d: Destination): Destination[] {
     .map(x => x.o);
 }
 
-function DestinationPage({ d }: { d: Destination }) {
+const PUBLISHED = ALL_DESTINATIONS.filter(d => STAG_GUIDES[d.id]);
+
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="cols">
+      <h2>{title}</h2>
+      <div className="body">{children}</div>
+    </section>
+  );
+}
+
+const paras = (ps: string[]) => ps.map((p, i) => <p key={i}>{p}</p>);
+
+function DestinationPage({ d, g }: { d: Destination; g: StagGuide }) {
   const photo = DESTINATION_PHOTOS[d.id];
   const related = relatedFor(d);
   const facts = Object.entries(d.meta).slice(0, 4);
@@ -178,8 +206,8 @@ function DestinationPage({ d }: { d: Destination }) {
     <Shell active="/stag">
       <section className="hero">
         <div className="wrap">
-          <div className="crumbs"><a href="/">Lapel</a><span>/</span><a href="/stag">Stag</a><span>/</span>{d.label}</div>
-          <div className="spread">
+          <div className="crumbs"><a href="/">Lapel</a><span>/</span><a href="/stag">Stag</a><span>/</span><a href="/stag/destinations">Destinations</a><span>/</span>{d.label}</div>
+          <div className={photo ? "spread" : undefined}>
             <div>
               <h1>{d.label} stag do</h1>
               <div className="rule" />
@@ -205,16 +233,32 @@ function DestinationPage({ d }: { d: Destination }) {
               {facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
             </dl>
           )}
-          <section className="cols">
-            <h2>What to know</h2>
-            <div className="body"><p>{d.stagInfo}</p></div>
-          </section>
+          <Section title={`Why ${d.label}`}>{paras(g.intro)}</Section>
+          <Section title="Do locals mind stags?">{paras(g.locals)}</Section>
+          <Section title="Getting into bars">{paras(g.gettingIn)}</Section>
+          <Section title="Where to drink">
+            <dl className="list">{g.areas.map(a => <div key={a.name}><dt>{a.name}</dt><dd>{a.text}</dd></div>)}</dl>
+          </Section>
+          <Section title="What to do">
+            <dl className="list">{g.doing.map(a => <div key={a.name}><dt>{a.name}</dt><dd>{a.text}</dd></div>)}</dl>
+          </Section>
+          <Section title="A weekend plan">
+            <dl className="list">{g.plan.map(a => <div key={a.day}><dt>{a.day}</dt><dd>{a.text}</dd></div>)}</dl>
+          </Section>
+          <Section title="Where to stay">{paras(g.stay)}</Section>
+          <Section title="What it costs">
+            <table className="costs"><tbody>{g.costs.map(c => <tr key={c.item}><th>{c.item}</th><td>{c.amount}</td></tr>)}</tbody></table>
+            {g.costNote && <p className="note">{g.costNote}</p>}
+          </Section>
+          <Section title="Worth knowing">
+            <ul className="bullets">{g.watchOuts.map((w, i) => <li key={i}>{w}</li>)}</ul>
+          </Section>
           {goodFor.length > 0 && (
-            <section className="cols">
-              <h2>Best for</h2>
-              <div className="chips">{goodFor.map(g => <span key={g}>{g}</span>)}</div>
-            </section>
+            <Section title="Best for">
+              <div className="chips">{goodFor.map(x => <span key={x}>{x}</span>)}</div>
+            </Section>
           )}
+          <p className="checked">Facts on this page were last checked in {g.checked}. Venue policies and prices change, so check before you book.</p>
           <section className="cta">
             <div>
               <h3>Planning {d.label}?</h3>
@@ -245,20 +289,79 @@ function DestinationPage({ d }: { d: Destination }) {
   );
 }
 
+function IndexPage() {
+  const regions = ["uk-ireland", "europe", "longhaul"];
+  return (
+    <Shell active="/stag">
+      <section className="hero">
+        <div className="wrap">
+          <div className="crumbs"><a href="/">Lapel</a><span>/</span><a href="/stag">Stag</a><span>/</span>Destinations</div>
+          <h1>Stag do destinations</h1>
+          <div className="rule" />
+          <p className="lede">Honest guides to the places stag groups actually go, from how locals feel about you to which bars will let a big group in.</p>
+        </div>
+      </section>
+      <main>
+        <div className="wrap">
+          {regions.map(r => {
+            const list = PUBLISHED.filter(d => d.region === r);
+            if (!list.length) return null;
+            return (
+              <section className="related" key={r} style={{ marginBottom: 48 }}>
+                <h2>{REGION_LABEL[r]}</h2>
+                <div className="grid">
+                  {list.map(d => (
+                    <a key={d.id} className="card" href={`/stag/${d.id}`}>
+                      <h3>{d.label}</h3>
+                      <div className="c">{d.country}</div>
+                      <p>{clip(d.desc, 110)}</p>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+          <section className="cta">
+            <div>
+              <h3>Not sure where to go?</h3>
+              <p>Answer a few questions about the group and the groom, and Lapel will narrow nearly 200 destinations down to the ones that fit.</p>
+            </div>
+            <div className="btns"><a className="btn dark" href="/stag">Plan your stag &rarr;</a></div>
+          </section>
+        </div>
+      </main>
+    </Shell>
+  );
+}
+
 export function renderPages(): StaticPage[] {
-  return ALL_DESTINATIONS.map(d => {
+  const pages: StaticPage[] = PUBLISHED.map(d => {
+    const g = STAG_GUIDES[d.id];
     const path = `/stag/${d.id}`;
     const photo = DESTINATION_PHOTOS[d.id];
     return {
       path,
       html: doc({
         path,
-        title: `${d.label} Stag Do — Travel, Timing & What to Know | Lapel`,
-        desc: clip(`${d.label} stag do guide: ${d.desc} ${d.stagInfo}`, 155),
+        title: `${d.label} Stag Do Guide: Bars, Activities & Local Tips | Lapel`,
+        desc: clip(`Planning a ${d.label} stag do? ${g.intro[0]}`, 155),
         image: photo?.imageUrl,
-        jsonld: [breadcrumbLd([{ name: "Lapel", path: "/" }, { name: "Stag", path: "/stag" }, { name: d.label, path }])],
-        body: renderToStaticMarkup(<DestinationPage d={d} />),
+        jsonld: [breadcrumbLd([{ name: "Lapel", path: "/" }, { name: "Stag", path: "/stag" }, { name: "Destinations", path: "/stag/destinations" }, { name: d.label, path }])],
+        body: renderToStaticMarkup(<DestinationPage d={d} g={g} />),
       }),
     };
   });
+  if (PUBLISHED.length) {
+    pages.push({
+      path: "/stag/destinations",
+      html: doc({
+        path: "/stag/destinations",
+        title: "Stag Do Destinations: Honest UK & European Guides | Lapel",
+        desc: "Honest stag do guides: how locals feel about stag groups, which bars let big groups in, what to do, where to stay and what it costs.",
+        jsonld: [breadcrumbLd([{ name: "Lapel", path: "/" }, { name: "Stag", path: "/stag" }, { name: "Destinations", path: "/stag/destinations" }])],
+        body: renderToStaticMarkup(<IndexPage />),
+      }),
+    });
+  }
+  return pages;
 }
