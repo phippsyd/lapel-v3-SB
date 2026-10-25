@@ -17,9 +17,11 @@ export type StagGuide = {
 };
 
 import { BATCH1 } from "./stag-batch1";
+import { BATCH2 } from "./stag-batch2";
 
 export const STAG_GUIDES: Record<string, StagGuide> = {
   ...BATCH1,
+  ...BATCH2,
   edinburgh: {
     checked: "October 2026",
     intro: [
