@@ -227,6 +227,7 @@ export default function Lapel() {
           .option-illus { display: none !important; }
           .intro-illus { display: none !important; }
           .hero-meta { display: none !important; }
+          .editor-note { grid-template-columns: 1fr !important; gap: 16px !important; }
         }
         @media (max-width: 480px) {
           .module-grid { grid-template-columns: 1fr !important; }
@@ -358,6 +359,27 @@ export default function Lapel() {
                 </div>
               ))}
             </div>
+
+            {/* Editor's note — origin story */}
+            <section className="editor-note" style={{ marginTop: 64, paddingTop: 40, borderTop: "1px solid " + T.rule, display: "grid", gridTemplateColumns: "200px 1fr", gap: 48 }}>
+              <h2 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: 30, lineHeight: 1.1, color: T.ink, letterSpacing: "-0.01em" }}>
+                Why Lapel
+              </h2>
+              <div style={{ maxWidth: 560, fontSize: 15, lineHeight: 1.75, color: T.ink }}>
+                <p style={{ marginBottom: 16 }}>
+                  When my brother Tom asked me to be his best man, we went suit shopping. During the fitting, the assistant asked which lapel I wanted.
+                </p>
+                <p style={{ marginBottom: 16 }}>
+                  I had no idea. He held up two jackets, one with a peak lapel and one with a shawl, and waited. It turned out to be the first of many decisions that afternoon that I hadn&rsquo;t known I&rsquo;d have to make. I left feeling rushed, and wishing I&rsquo;d done my homework.
+                </p>
+                <p style={{ marginBottom: 20 }}>
+                  The information is all out there if you know what to search for. What&rsquo;s missing is the questions you don&rsquo;t know to ask. Lapel is my attempt to answer them before you&rsquo;re stood in the fitting room.
+                </p>
+                <div style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", fontWeight: 400, fontSize: 22, color: T.ink }}>
+                  Dominic
+                </div>
+              </div>
+            </section>
 
             {/* Footer strip */}
             <div style={{ marginTop: 64, paddingTop: 32, borderTop: "1px solid " + T.rule, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
